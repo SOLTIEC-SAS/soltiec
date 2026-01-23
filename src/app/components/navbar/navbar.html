@@ -1,1 +1,23 @@
-<p>navbar works!</p>
+<nav class="navbar">
+    <div class="logo">
+        <img src="https://raw.githubusercontent.com/SOLTIEC-SAS/banco-imagenes/main/logo_soltiec_transparente_blanco.png" alt="Logo SOLTIEC SAS"/>
+    </div>
+    <div class="hamburger" (click)="toggleMenu()">☰</div>
+    <ul class="menu" [class.open]="menuAbierto">
+        <li>INICIO</li>
+        <li>NOSOTROS</li>
+        <li class="dropdown">
+            <span (click)="toggleServicios()">
+                SERVICIOS ▾
+            </span>
+            <ul class="submenu" *ngIf="serviciosAbierto">
+                <li>Tecnología</li>
+                <li>Ingeniería</li>
+                <li>Energía</li>
+                <li>Construcción</li>
+            </ul>
+        </li>
+        <li>PROYECTOS</li>
+        <li>CONTACTO</li>
+    </ul>
+</nav>

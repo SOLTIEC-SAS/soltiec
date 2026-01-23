@@ -87,10 +87,8 @@ footer {
 
 .row-footer {
   display: flex;
-  margin: 3% 0%;
+  margin: 5% 0;
 }
-
-
 
 .copyright {
   width: 100%;
@@ -106,6 +104,7 @@ footer {
   font-size: 20px;
   text-align: center !important;
 }
+
 
 @media (max-width: 900px) {
   .footer-info {
