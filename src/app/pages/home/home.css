@@ -4,7 +4,6 @@
   position: relative;
   overflow: hidden;
   background-color: #000;
-  /* Fondo negro por si las imágenes tardan en cargar */
 }
 
 .slider img {
@@ -14,12 +13,9 @@
   height: 100%;
   object-fit: cover;
   opacity: 0;
-  /* Ajusté a 32s para que 8 imágenes tengan 4s cada una */
-  animation: fade 32s infinite;
+  animation: fade 40s infinite;
     border: clamp(1px, 0.3vw, 4px) solid #146582;
 }
-
-/* Estilos para el contenedor del texto */
 .slider-content {
   position: absolute;
   inset: 0;
@@ -33,7 +29,7 @@
 .slider-content h1 {
   width: 100%;
   text-align: center;
-  font-size: clamp(20px, 4vw, 50px);
+  font-size: clamp(20px, 4vw, 40px);
   color: #146582;
 border-top: clamp(1px, 0.3vw, 4px) solid #146582;
   border-bottom: clamp(1px, 0.3vw, 4px) solid #146582;
@@ -43,37 +39,36 @@ border-top: clamp(1px, 0.3vw, 4px) solid #146582;
 
 
 
-/* Delays para las 8 imágenes (Intervalos de 4 segundos) */
 .slider img:nth-child(1) {
   animation-delay: 0s;
 }
 
 .slider img:nth-child(2) {
-  animation-delay: 4s;
+  animation-delay: 5s;
 }
 
 .slider img:nth-child(3) {
-  animation-delay: 8s;
+  animation-delay: 10s;
 }
 
 .slider img:nth-child(4) {
-  animation-delay: 12s;
+  animation-delay: 15s;
 }
 
 .slider img:nth-child(5) {
-  animation-delay: 16s;
-}
-
-.slider img:nth-child(6) {
   animation-delay: 20s;
 }
 
+.slider img:nth-child(6) {
+  animation-delay: 25s;
+}
+
 .slider img:nth-child(7) {
-  animation-delay: 24s;
+  animation-delay: 30s;
 }
 
 .slider img:nth-child(8) {
-  animation-delay: 28s;
+  animation-delay: 35s;
 }
 
 @keyframes fade {
@@ -89,7 +84,7 @@ border-top: clamp(1px, 0.3vw, 4px) solid #146582;
     opacity: 1;
   }
 
-  /* Se mantiene visible el 12.5% del tiempo total (4s de 32s) */
+
   17.5% {
     opacity: 0;
   }

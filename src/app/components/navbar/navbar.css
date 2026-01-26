@@ -2,13 +2,13 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 12px 30px;
+  padding: 5px 30px;
   background: #146582;
   border-bottom: 1px solid #C0CBD8;
 }
 
 .logo img {
-  height: 75px;
+  height: 50px;
 }
 
 .menu {
@@ -24,7 +24,7 @@
 .menu li {
   cursor: pointer;
   position: relative;
-  font-size: 20px;
+  font-size: 17.5px;
 }
 
 .menu li:hover {
