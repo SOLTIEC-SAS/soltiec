@@ -1,0 +1,100 @@
+.slider {
+  width: 100%;
+  height: 70vh;
+  position: relative;
+  overflow: hidden;
+  background-color: #000;
+  /* Fondo negro por si las imágenes tardan en cargar */
+}
+
+.slider img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  /* Ajusté a 32s para que 8 imágenes tengan 4s cada una */
+  animation: fade 32s infinite;
+    border: clamp(1px, 0.3vw, 4px) solid #146582;
+}
+
+/* Estilos para el contenedor del texto */
+.slider-content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+
+}
+
+.slider-content h1 {
+  width: 100%;
+  text-align: center;
+  font-size: clamp(20px, 4vw, 50px);
+  color: #146582;
+border-top: clamp(1px, 0.3vw, 4px) solid #146582;
+  border-bottom: clamp(1px, 0.3vw, 4px) solid #146582;
+  background-color: #FFFFFF;
+}
+
+
+
+
+/* Delays para las 8 imágenes (Intervalos de 4 segundos) */
+.slider img:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.slider img:nth-child(2) {
+  animation-delay: 4s;
+}
+
+.slider img:nth-child(3) {
+  animation-delay: 8s;
+}
+
+.slider img:nth-child(4) {
+  animation-delay: 12s;
+}
+
+.slider img:nth-child(5) {
+  animation-delay: 16s;
+}
+
+.slider img:nth-child(6) {
+  animation-delay: 20s;
+}
+
+.slider img:nth-child(7) {
+  animation-delay: 24s;
+}
+
+.slider img:nth-child(8) {
+  animation-delay: 28s;
+}
+
+@keyframes fade {
+  0% {
+    opacity: 0;
+  }
+
+  5% {
+    opacity: 1;
+  }
+
+  12.5% {
+    opacity: 1;
+  }
+
+  /* Se mantiene visible el 12.5% del tiempo total (4s de 32s) */
+  17.5% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}

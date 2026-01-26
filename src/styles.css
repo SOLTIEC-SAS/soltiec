@@ -1,1 +1,12 @@
-/* You can add global styles to this file, and also import other style files */
+section {
+    width: 80%;
+    display: block;
+    margin: auto;
+}
+
+
+@media (max-width: 900px) {
+    section {
+        width: 100%;
+    }
+}
