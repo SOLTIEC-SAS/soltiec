@@ -4,15 +4,14 @@ import { RouterOutlet } from '@angular/router';
 import { Navbar } from './components/navbar/navbar';
 import { WhatsappButton } from './components/whatsapp-button/whatsapp-button';
 import { Footer } from './components/footer/footer';
-import { Home } from './pages/home/home';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet,
+  imports: [
+    RouterOutlet,
     Navbar,
     WhatsappButton, 
-    Footer,
-    Home
+    Footer
   ],
   templateUrl: './app.html',
   styleUrl: './app.css'

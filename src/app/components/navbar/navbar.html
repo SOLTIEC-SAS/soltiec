@@ -1,11 +1,13 @@
 <nav class="navbar">
+    <a routerLink="/inicio">
     <div class="logo">
         <img src="https://raw.githubusercontent.com/SOLTIEC-SAS/banco-imagenes/main/logo_soltiec_transparente_blanco.png" alt="Logo SOLTIEC SAS"/>
     </div>
+    </a>
     <div class="hamburger" (click)="toggleMenu()">☰</div>
     <ul class="menu" [class.open]="menuAbierto">
         <li>INICIO</li>
-        <li>NOSOTROS</li>
+             <li><a routerLink="/nosotros">NOSOTROS</a></li>
         <li class="dropdown">
             <span (click)="toggleServicios()">
                 SERVICIOS ▾

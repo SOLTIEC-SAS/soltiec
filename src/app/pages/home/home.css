@@ -7,7 +7,7 @@
   height: 70vh;
   position: relative;
   overflow: hidden;
-  background-color: #000;
+  background-color: #000000;
 }
 
 .slider img {
@@ -96,13 +96,6 @@
   }
 }
 
-.services h1 {
-  text-align: center;
-  font-size: 36px;
-  margin-bottom: 40px;
-  font-weight: 700;
-}
-
 .services-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -115,6 +108,7 @@
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  margin: 10px;
 }
 
 
@@ -145,6 +139,7 @@
   align-items: center;
   text-align: center;
   padding: 30px;
+  border: clamp(1px, 0.3vw, 1px) solid #C0CBD8;
 }
 
 .overlay h2 {
@@ -176,6 +171,10 @@
 
 
 @media (max-width: 900px) {
+   .slider {
+    height: 60vh;
+   }
+
   .services-grid {
     grid-template-columns: 1fr;
   }
@@ -184,6 +183,9 @@
     height: 260px;
   }
 
+  .service-card{
+    margin: 1% 0%;
+  }
   .overlay h2 {
     font-size: 20px;
   }
