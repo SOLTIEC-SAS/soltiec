@@ -1,3 +1,7 @@
+.slider-home {
+  margin-top: 80px;
+}
+
 .slider {
   width: 100%;
   height: 70vh;
@@ -14,8 +18,9 @@
   object-fit: cover;
   opacity: 0;
   animation: fade 40s infinite;
-    border: clamp(1px, 0.3vw, 4px) solid #146582;
+  /*border: clamp(1px, 0.3vw, 4px) solid #146582;*/
 }
+
 .slider-content {
   position: absolute;
   inset: 0;
@@ -31,13 +36,10 @@
   text-align: center;
   font-size: clamp(20px, 4vw, 40px);
   color: #146582;
-border-top: clamp(1px, 0.3vw, 4px) solid #146582;
-  border-bottom: clamp(1px, 0.3vw, 4px) solid #146582;
+  /*border-top: clamp(1px, 0.3vw, 4px) solid #146582;
+  border-bottom: clamp(1px, 0.3vw, 4px) solid #146582;*/
   background-color: #FFFFFF;
 }
-
-
-
 
 .slider img:nth-child(1) {
   animation-delay: 0s;
@@ -91,5 +93,102 @@ border-top: clamp(1px, 0.3vw, 4px) solid #146582;
 
   100% {
     opacity: 0;
+  }
+}
+
+.services h1 {
+  text-align: center;
+  font-size: 36px;
+  margin-bottom: 40px;
+  font-weight: 700;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  width: 100%;
+}
+
+.service-card {
+  position: relative;
+  height: 330px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+
+.tech {
+  background-image: url('https://raw.githubusercontent.com/SOLTIEC-SAS/banco-imagenes/main/Servicio_Tecnologia.png');
+}
+
+.eng {
+  background-image: url('https://raw.githubusercontent.com/SOLTIEC-SAS/banco-imagenes/main/Servicio_Ingenieria.png');
+}
+
+.energy {
+  background-image: url('https://raw.githubusercontent.com/SOLTIEC-SAS/banco-imagenes/main/Servicio_Energia.png');
+}
+
+.build {
+  background-image: url('https://raw.githubusercontent.com/SOLTIEC-SAS/banco-imagenes/main/Servicio_Construccion.png');
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 90, 110, 0.8);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 30px;
+}
+
+.overlay h2 {
+  font-size: 25px;
+  margin-bottom: 15px;
+  letter-spacing: 1px;
+}
+
+.overlay p {
+  font-size: 20px;
+  line-height: 1.6;
+  margin-bottom: 20px;
+  max-width: 90%;
+}
+
+.btn {
+  color: #FFFFFF;
+  text-decoration: none;
+  border: 1px solid #FFFFFF;
+  padding: 10px 22px;
+  font-weight: 600;
+  transition: 0.3s ease;
+}
+
+.btn:hover {
+  background: #FFFFFF;
+  color: #005a6e;
+}
+
+
+@media (max-width: 900px) {
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .service-card {
+    height: 260px;
+  }
+
+  .overlay h2 {
+    font-size: 20px;
+  }
+
+  .overlay p {
+    font-size: 17.5px;
   }
 }

@@ -16,22 +16,22 @@ footer {
 }
 
 .footer-info h1 {
-  font-size: 17.5px;
+  font-size: 20px;
   text-align: left;
   color: #C0CBD8;
   margin-top: 25px;
 }
 
 .footer-info span {
-  font-size: 17.5px;
+  font-size: 20px;
   color: #FFFFFF;
   display: inline-block;
-  white-space: nowrap; 
-  vertical-align: middle; 
+  white-space: nowrap;
+  vertical-align: middle;
 }
 
 .footer-info a {
-  font-size: 17.5px;
+  font-size: 20px;
   color: #FFFFFF;
   text-decoration: none;
 }
@@ -129,7 +129,7 @@ footer {
     align-items: center;
   }
 
-  .row-footer{
+  .row-footer {
     min-width: 250px;
   }
 
