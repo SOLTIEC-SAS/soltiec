@@ -111,6 +111,9 @@ footer {
 
 
 @media (max-width: 900px) {
+  .footer{
+    width: 100% !important;
+  }
   .footer-info {
     display: grid;
     grid-template-columns: 1fr;

@@ -28,6 +28,16 @@
   margin: auto 0;
 }
 
+.menu a {
+  text-decoration: none; /* quita el subrayado */
+  color: inherit;        /* usa el color del texto normal */
+}
+
+.menu a:visited {
+  
+  color: inherit;
+
+}
 .menu li {
   cursor: pointer;
   position: relative;
@@ -39,9 +49,22 @@
   color: #C0CBD8;
 }
 
+
+
+
+
+
+.dropdown {
+  position: relative;
+}
+
+
+
+
+
 .submenu {
   position: absolute;
-  top: 35px;
+  top: 100%;   /* se pega justo debajo del botón */
   left: 0;
   background: #146582;
   box-shadow: 0 4px 12px rgba(0, 0, 0, .15);
@@ -49,6 +72,7 @@
   padding: 10px 0;
   min-width: 180px;
 }
+
 
 .submenu li {
   padding: 10px 20px;

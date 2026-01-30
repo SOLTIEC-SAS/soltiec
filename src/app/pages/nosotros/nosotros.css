@@ -1,0 +1,10 @@
+.about{
+    max-width:1000px ;
+    display: block;
+    margin: auto;
+}
+.about p{
+    color: #000000;
+    font-size: 20px;
+    text-align: justify;
+}

@@ -4,6 +4,6 @@ import { Nosotros } from './pages/nosotros/nosotros';
 
 export const routes: Routes = [
     { path: '', component: Home },
-    { path: 'Inicio', component: Home },
-    { path: 'Nosotros', component: Nosotros },
+    { path: 'inicio', component: Home },
+    { path: 'nosotros', component: Nosotros },
 ];
