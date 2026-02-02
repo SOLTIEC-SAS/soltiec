@@ -15,11 +15,13 @@ export class Proyectos {
   tabActiva = 'Todos';
 
   proyectos = [
+    { titulo: 'Construcción parque infantil', categoria: 'Construcción', ubicacion: 'Medellín, Antioquia', imagen: 'https://raw.githubusercontent.com/SOLTIEC-SAS/banco-imagenes/main/Construccion1.JPEG', alt: "Adecuación parque infantil" },
+    { titulo: 'Adecuación cancha sintética', categoria: 'Construcción', ubicacion: 'Medellín, Antioquia', imagen: 'https://raw.githubusercontent.com/SOLTIEC-SAS/banco-imagenes/main/Construccion2.JPEG', atl: "Adecuación cancha sintética" },
+    { titulo: 'Adecuación cancha arenilla', categoria: 'Construcción', ubicacion: 'Medellín, Antioquia', imagen: 'https://raw.githubusercontent.com/SOLTIEC-SAS/banco-imagenes/main/Construccion3.jpg', atl: "Adecuación cancha arenilla" },
+    { titulo: 'Adecuación parque infantil', categoria: 'Construcción', ubicacion: 'Medellín, Antioquia', imagen: 'https://raw.githubusercontent.com/SOLTIEC-SAS/banco-imagenes/main/Construccion4.JPEG', atl: "Adecuación parque infantil" },
+    { titulo: 'Cambio de fachada', categoria: 'Construcción', ubicacion: 'Medellín, Antioquia', imagen: 'https://raw.githubusercontent.com/SOLTIEC-SAS/banco-imagenes/main/Construccion5.JPEG', atl: "Cambio de fachada" },
 
-    { titulo: 'Proyecto Ingeniería 1', categoria: 'Tecnología', ubicacion: 'Medellín, Antioquia', imagen: 'https://raw.githubusercontent.com/SOLTIEC-SAS/banco-imagenes/main/Servicio_Energia.png' },
-    { titulo: 'Proyecto Ingeniería 1', categoria: 'Ingeniería', ubicacion: 'Medellín, Antioquia', imagen: 'https://raw.githubusercontent.com/SOLTIEC-SAS/banco-imagenes/main/Servicio_Energia.png' },
-    { titulo: 'Proyecto Energía 1', categoria: 'Energía', ubicacion: 'Medellín, Antioquia', imagen: 'https://raw.githubusercontent.com/SOLTIEC-SAS/banco-imagenes/main/Servicio_Energia.png' },
-    { titulo: 'Proyecto Construcción 1', categoria: 'Construcción', ubicacion: 'Medellín, Antioquia', imagen: 'https://raw.githubusercontent.com/SOLTIEC-SAS/banco-imagenes/main/Servicio_Energia.png' },
+
   ];
 
   get proyectosFiltrados() {

@@ -8,7 +8,7 @@
   <div class="grid">
     <article class="card" *ngFor="let proyecto of proyectosFiltrados">
       <h2 class="titulo">{{ proyecto.titulo }}</h2>
-      <img [src]="proyecto.imagen" alt="Proyecto">
+      <img [src]="proyecto.imagen" alt={{proyecto.alt}}>
       <span class="ubicacion">{{ proyecto.ubicacion }}</span>
     </article>
   </div>
