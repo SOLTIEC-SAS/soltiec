@@ -1,18 +1,22 @@
-
-
-
 section {
     width: 80%;
     display: block;
     margin: 5% auto;
 }
 
-
-h1{
+h1 {
     color: #146582;
-    font-size: 40px;
+    font-size: clamp(26px, 5vw, 40px);
     text-align: center;
     font-weight: bold;
+}
+
+h2 {
+    font-size: clamp(18px, 3vw, 25px);
+}
+
+p {
+    font-size: clamp(20px, 1vw, 40px) !important;
 }
 
 
@@ -20,7 +24,8 @@ h1{
     section {
         width: 90%;
     }
-    .main-section{
+
+    .main-section {
         margin-top: 80px;
     }
 }

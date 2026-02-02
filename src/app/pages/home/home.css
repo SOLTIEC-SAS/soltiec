@@ -149,7 +149,6 @@
 }
 
 .overlay p {
-  font-size: 20px;
   line-height: 1.6;
   margin-bottom: 20px;
   max-width: 90%;
@@ -180,7 +179,7 @@
   }
 
   .service-card {
-    height: 260px;
+    height: 300px;
   }
 
   .service-card{
@@ -190,7 +189,5 @@
     font-size: 20px;
   }
 
-  .overlay p {
-    font-size: 17.5px;
-  }
+
 }
