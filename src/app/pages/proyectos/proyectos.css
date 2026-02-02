@@ -1,0 +1,73 @@
+.proyectos {
+  text-align: center;
+}
+
+.tabs {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 40px;
+}
+
+.tabs button {
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  background: white;
+  cursor: pointer;
+}
+
+.tabs button.active {
+  background: #0f5c75;
+  color: white;
+}
+
+/* Grid responsive */
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 25px;
+}
+
+@media (max-width: 1200px) {
+  .grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 900px) {
+  .grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 500px) {
+  .grid { grid-template-columns: 1fr; }
+}
+
+/* Card */
+
+.card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 6px 18px rgba(0,0,0,.1);
+}
+
+.titulo {
+  padding: 12px;
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.card img {
+  width: 100%;
+  height: 190px;
+  object-fit: cover;
+}
+
+.ubicacion {
+  display: block;
+  padding: 10px 12px 14px;
+  color: #666;
+  font-size: 14px;
+}

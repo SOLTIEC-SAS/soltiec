@@ -9,9 +9,7 @@
     <ul class="menu" [class.open]="menuAbierto">
         <li><a routerLink="/inicio" (click)="menuAbierto = false">INICIO</a></li>
         <li><a routerLink="/nosotros" (click)="menuAbierto = false">NOSOTROS</a></li>
-        <li class="dropdown"
-    (mouseenter)="serviciosAbierto = true"
-    (mouseleave)="serviciosAbierto = false">
+        <li class="dropdown" (mouseenter)="serviciosAbierto = true" (mouseleave)="serviciosAbierto = false">
             <span (click)="toggleServicios()">
                 SERVICIOS ▾
             </span>
@@ -22,7 +20,7 @@
                 <li>CONSTRUCCIÓN</li>
             </ul>
         </li>
-        <li>PROYECTOS</li>
+        <li><a routerLink="/proyectos" (click)="menuAbierto = false">PROYECTOS</a></li>
         <li>CONTACTO</li>
     </ul>
 </nav>

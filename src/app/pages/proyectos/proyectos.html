@@ -1,0 +1,28 @@
+<section class="proyectos">
+
+  <h1>PROYECTOS</h1>
+  <div class="tabs">
+    <button
+      *ngFor="let tab of tabs"
+      (click)="seleccionarTab(tab)"
+      [class.active]="tab === tabActiva">
+      {{ tab }}
+    </button>
+  </div>
+  <div class="grid">
+
+    <article
+      class="card"
+      *ngFor="let proyecto of proyectosFiltrados">
+
+      <h3 class="titulo">{{ proyecto.titulo }}</h3>
+
+      <img [src]="proyecto.imagen" alt="Proyecto">
+
+      <span class="ubicacion">{{ proyecto.ubicacion }}</span>
+
+    </article>
+
+  </div>
+
+</section>
