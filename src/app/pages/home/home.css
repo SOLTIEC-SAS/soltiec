@@ -143,9 +143,10 @@
 }
 
 .overlay h2 {
-  font-size: 25px;
+font-size: clamp(19px, 3.2vw, 25px);
   margin-bottom: 15px;
   letter-spacing: 1px;
+  font-weight: bold;
 }
 
 .overlay p {
@@ -185,9 +186,4 @@
   .service-card{
     margin: 1% 0%;
   }
-  .overlay h2 {
-    font-size: 20px;
-  }
-
-
 }

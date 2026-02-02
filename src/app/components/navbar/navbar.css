@@ -92,7 +92,6 @@ font-size: clamp(15px, 2.6vw, 17.5px);
   color: #FFFFFF;
 }
 
-
 @media (max-width: 900px) {
   .hamburger {
     display: block;
