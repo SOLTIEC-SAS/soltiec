@@ -6,4 +6,87 @@
 .about p{
     color: #000000;
     text-align: justify;
+    line-height: 1.5;
 }
+
+
+
+
+
+
+.soltiec-section {
+  margin: 0 auto;
+  text-align: center;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0px 10px;
+}
+
+.soltiec-section h1 {
+  grid-column: 1 / -1;
+margin-bottom: clamp(15px, 3vw, 30px);
+}
+
+.about-card {
+  position: relative;
+  display: block;
+  margin: 0 auto;
+  max-width: 350px;
+}
+
+.about-card h2 {
+  font-weight: bold;
+  color: #146582;
+}
+
+.about-card p {
+text-align: justify;
+  color: #000000;
+  line-height: 1.5;
+}
+
+
+
+
+
+
+
+/* Separadores */
+.about-card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: -30px;
+  width: 1px;
+  height: 100%;
+  border-right: 1px solid rgba(15, 92, 117, 1);
+
+}
+
+.about-card:last-child::after {
+  display: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media (max-width: 900px) {
+  .soltiec-section {
+    grid-template-columns: 1fr;
+  }
+  .about-card::after {
+    display: none;
+  }
+}
+
+

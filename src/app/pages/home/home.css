@@ -109,8 +109,9 @@
   background-position: center;
   background-repeat: no-repeat;
   margin: 10px;
-}
 
+  
+}
 
 .tech {
   background-image: url('https://raw.githubusercontent.com/SOLTIEC-SAS/banco-imagenes/main/Servicio_Tecnologia.png');
@@ -166,7 +167,9 @@ font-size: clamp(19px, 3.2vw, 25px);
 
 .btn:hover {
   background: #FFFFFF;
-  color: #005a6e;
+  color: #146582;
+  font-weight: bold;
+  border: #146582;
 }
 
 
