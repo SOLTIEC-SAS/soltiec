@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-nosotros',
@@ -8,9 +9,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrl: './nosotros.css',
 })
 export class Nosotros implements OnInit {
-
   diasSinAccidentes: number = 0;
-
+  constructor(private title: Title) {
+    this.title.setTitle('NOSOTROS | SOLTIEC SAS');
+  }
   ngOnInit(): void {
     const fechaInicio = new Date(2023, 6, 4); 
     const hoy = new Date();

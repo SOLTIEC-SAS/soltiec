@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-proyectos',
@@ -10,6 +11,9 @@ import { CommonModule } from '@angular/common';
 })
 export class Proyectos {
 
+      constructor(private title: Title) {
+    this.title.setTitle('PROYECTOS | SOLTIEC SAS');
+  }
   tabs = ['Todos', 'Tecnología', 'Ingeniería', 'Energía', 'Construcción'];
 
   tabActiva = 'Todos';
