@@ -1,33 +1,39 @@
+html {
+  scroll-behavior: smooth;
+}
 section {
     width: 80%;
     display: block;
     margin: 5% auto;
 }
-
 h1 {
     color: #146582;
     font-size: clamp(26px, 3vw, 34px);
     text-align: center;
     font-weight: bold;
 }
-
 h2 {
   font-size: clamp(20px, 2.2vw, 26px);
   text-align: center;
 }
 
+h3 {
+  font-size: clamp(16px, 1.8vw, 20px);
+  text-align: center;
+}
 p {
-      font-size: clamp(15px, 1.2vw, 18px)!important;
+      font-size: clamp(15px, 1.2vw, 18px);
   line-height: 1.6;
 }
 
 
+
+
+.main-section{
+    margin-top: 10px;
+}
 @media (max-width: 900px) {
     section {
         width: 90%;
-    }
-
-    .main-section {
-        margin-top: 80px;
     }
 }
