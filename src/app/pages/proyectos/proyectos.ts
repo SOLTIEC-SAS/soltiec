@@ -11,7 +11,7 @@ import { Title } from '@angular/platform-browser';
 })
 export class Proyectos {
 
-      constructor(private title: Title) {
+  constructor(private title: Title) {
     this.title.setTitle('PROYECTOS | SOLTIEC SAS');
   }
   tabs = ['Todos', 'Tecnología', 'Ingeniería', 'Energía', 'Construcción'];

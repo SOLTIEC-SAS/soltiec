@@ -14,9 +14,9 @@
                 SERVICIOS ▾
             </span>
             <ul class="submenu" *ngIf="serviciosAbierto">
-                <li>TECNOLOGÍA</li>
+                <li><a routerLink="/tecnologia" (click)="menuAbierto = false">TECNOLOGÍA</a></li>
                 <li>INGENIERÍA</li>
-                <li>ENERGÍA</li>
+                <li><a routerLink="/energia" (click)="menuAbierto = false">ENERGÍA</a></li>
                 <li>CONSTRUCCIÓN</li>
             </ul>
         </li>
