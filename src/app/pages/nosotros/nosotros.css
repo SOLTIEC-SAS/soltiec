@@ -51,18 +51,6 @@
     line-height: 1.5;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
 .values-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -96,19 +84,6 @@
   margin-top: 5px;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 .contador-accidentes {
     text-align: center;
     border-radius: 12px;
@@ -116,7 +91,9 @@
     margin: auto;
 
 }
-
+.contador-accidentes p{
+    text-align: center;
+}
 .contador-box {
     display: inline-flex;
     flex-direction: column;
