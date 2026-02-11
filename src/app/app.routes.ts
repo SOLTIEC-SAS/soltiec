@@ -6,6 +6,7 @@ import { Tecnologia } from './pages/tecnologia/tecnologia';
 
 import { Energia } from './pages/energia/energia';
 import { Proyectos } from './pages/proyectos/proyectos';
+import { Calculadora } from './pages/calculadora/calculadora';
 
 export const routes: Routes = [
     { path: '', component: Home },
@@ -15,4 +16,5 @@ export const routes: Routes = [
 
     { path: 'energia', component: Energia },
     { path: 'proyectos', component: Proyectos },
+    { path: 'calculadora', component: Calculadora },
 ];
