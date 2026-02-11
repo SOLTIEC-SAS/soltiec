@@ -57,7 +57,7 @@
   gap: clamp(20px, 4vw, 50px);
   margin: clamp(15px, 4vw, 30px) auto;
   max-width: 1270px;
-  border-bottom: 1px solid #146582;
+  border-bottom: 2px solid #146582;
   padding-bottom: clamp(20px, 4vw, 40px);
 }
 
