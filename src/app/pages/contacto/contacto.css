@@ -59,7 +59,6 @@ padding: clamp(6px, 0.8vw, 10px) clamp(12px, 1.5vw, 20px);
 
 
 
-
 .contact-form {
     flex: 1;
     display: block;
@@ -136,7 +135,10 @@ padding: clamp(6px, 0.8vw, 10px) clamp(12px, 1.5vw, 20px);
     color: #146582;
 }
 
-
+.alert-sucess{
+    text-align: center;
+    color: #146582;
+}
 
 
 
@@ -145,10 +147,6 @@ padding: clamp(6px, 0.8vw, 10px) clamp(12px, 1.5vw, 20px);
 @media (max-width: 900px) {
     .contact-container {
         flex-direction: column;
-    }
-
-    .contact-info {
-        
     }
 
     .btn-whatsapp {
