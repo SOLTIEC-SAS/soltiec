@@ -21,7 +21,6 @@ export class Contacto {
   enviado = false;
   error = false;
 
-  // Auto resize del textarea
   autoResize(event: any) {
     const textarea = event.target;
     textarea.style.height = 'auto';
@@ -44,20 +43,25 @@ export class Contacto {
         from_name: form.value.nombre,
         phone: form.value.telefono,
         from_email: form.value.email || 'No proporcionado',
-        message: form.value.mensaje || 'Sin mensaje'
+        message: form.value.mensaje || 'Sin mensaje',
+        servicio: form.value.servicio || 'No especificado'
       },
       'GtSDHnH74g9kOpuYS'
     )
     .then(() => {
+
       this.loading = false;
       this.enviado = true;
+
       form.resetForm();
 
       setTimeout(() => {
         this.enviado = false;
       }, 4000);
+
     })
     .catch((err) => {
+
       console.error('Error EmailJS:', err);
       this.loading = false;
       this.error = true;
@@ -65,6 +69,7 @@ export class Contacto {
       setTimeout(() => {
         this.error = false;
       }, 4000);
+
     });
   }
 }

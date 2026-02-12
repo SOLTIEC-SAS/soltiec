@@ -33,7 +33,7 @@
 .btn-whatsapp {
     display: block;
     margin: auto;
-padding: clamp(6px, 0.8vw, 10px) clamp(12px, 1.5vw, 20px);
+    padding: clamp(6px, 0.8vw, 10px) clamp(12px, 1.5vw, 20px);
     background-color: #146582;
     color: #FFFFFF;
     text-decoration: none;
@@ -64,27 +64,26 @@ padding: clamp(6px, 0.8vw, 10px) clamp(12px, 1.5vw, 20px);
     display: block;
     margin: auto;
     width: 100%;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-border-radius: clamp(10px, 1vw, 16px);
-
-
-}
-.contact-form h2{
-color: #146582;
-font-weight: bold;
-margin: clamp(15px, 4vw, 30px) auto;
+    border-left: solid 2px #146582;
 }
 
-
-.contact-form ::placeholder{
+.contact-form h2 {
     color: #146582;
+    font-weight: bold;
+    margin: clamp(15px, 4vw, 30px) auto;
+}
+
+
+.contact-form ::placeholder {
+    color: #146582;
+      font-size: clamp(14px, 0.95vw, 16px);
 }
 
 
 form {
     display: block;
     margin: auto;
-    
+
 }
 
 .form-group {
@@ -92,14 +91,30 @@ form {
 
 }
 
+
+
 .form-group input {
-    font-size: clamp(15px, 1.2vw, 18px);
+  font-size: clamp(14px, 0.95vw, 16px);
     line-height: 1.6;
     text-align: justify;
     background-color: #F0F8FF;
     max-height: 35px;
 
 }
+
+.form-group select {
+  font-size: clamp(14px, 0.95vw, 16px);
+    line-height: 1.6;
+    text-align: justify;
+    background-color: #F0F8FF;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    cursor: pointer;
+    color: #146582;
+
+}
+
 
 .form-control {
     padding: 10px;
@@ -108,19 +123,22 @@ form {
     max-width: 400px;
     display: block;
     margin: auto;
+    color: #146582;
 }
-
 textarea.form-control {
     resize: none;
     overflow: hidden;
     box-sizing: border-box;
     background-color: #F0F8FF;
+    
 }
+
+
 
 .btn-enviar {
     background-color: #146582;
     color: #FFFFFF;
-padding: clamp(6px, 0.8vw, 10px) clamp(12px, 1.5vw, 20px);
+    padding: clamp(6px, 0.8vw, 10px) clamp(12px, 1.5vw, 20px);
     border: solid 2px #146582;
     border-radius: 6px;
     cursor: pointer;
@@ -135,9 +153,10 @@ padding: clamp(6px, 0.8vw, 10px) clamp(12px, 1.5vw, 20px);
     color: #146582;
 }
 
-.alert-sucess{
+.alert-success, .alert-error{
     text-align: center;
     color: #146582;
+    font-weight: bold;
 }
 
 
@@ -156,10 +175,8 @@ padding: clamp(6px, 0.8vw, 10px) clamp(12px, 1.5vw, 20px);
     .contact-form {
         max-width: 600px;
     }
-    .contact-form h2{
 
-                margin: clamp(15px, 4vw, 30px) auto;
+    .contact-form h2 {
+        margin: clamp(15px, 4vw, 30px) auto;
+    }
 }
-
-}
-

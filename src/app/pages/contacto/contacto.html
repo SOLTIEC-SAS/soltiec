@@ -5,12 +5,12 @@
             <img src="https://raw.githubusercontent.com/SOLTIEC-SAS/banco-imagenes/main/logo_soltiec_transparente.png"
                 alt="Logo SOLTIEC SAS" />
             <p class="info-item">Medellín, Antioquia, Colombia</p>
-            <p class="info-item"><a href="https://soltiec.co/" target="_blank">https://soltiec.co/</a></p>
-            <p class="info-item"><a href="mailto:comercial@soltiec.co" target="_blank">comercial@soltiec.c/</a></p>
+            <p class="info-item"><a href="mailto:comercial@soltiec.co" target="_blank">comercial@soltiec.co</a></p>
+            <p class="info-item"><a href="tel:+573018928866" target="_blank">301 892 8866</a></p>
             <a href="https://wa.me/573018928866" target="_blank" class="btn-whatsapp">Enviar mensaje por WhatsApp</a>
         </div>
         <div class="contact-form">
-            <h2>¡Inicia tu proyecto con nosotros!</h2>
+            <h2>Recibe asesoría para tu proyecto</h2>
             <form #form="ngForm" (ngSubmit)="enviarFormulario(form)" novalidate>
                 <div class="form-group">
                     <input type="text" name="nombre" ngModel required placeholder="Nombre *" class="form-control">
@@ -21,18 +21,29 @@
                 <div class="form-group">
                     <input type="email" name="email" ngModel placeholder="Correo (opcional)" class="form-control">
                 </div>
+                <div class="form-group">
+                <select name="servicio" ngModel required #servicio="ngModel" class="form-control"> 
+                    <option value="" disabled selected>Tipo de servicio *</option>
+                    <option value="energia_solar">Energía solar</option>
+                    <option value="telecomunicaciones">Telecomunicaciones</option>
+                    <option value="automatizacion">Automatización</option>
+                    <option value="mantenimiento">Mantenimiento eléctrico</option>
+                    <option value="construccion">Construcción</option>
+                    <option value="consultoria">Consultoría</option>
+                    <option value="otro">Otro</option>
+                </select>
+                </div>
                 <textarea name="mensaje" ngModel placeholder="Mensaje (opcional)" class="form-control" rows="3"
                     (input)="autoResize($event)"></textarea>
-
                 <button type="submit" [disabled]="form.invalid || loading" class="btn-enviar">
-                    {{ loading ? 'Enviando...' : 'Enviar mensaje' }}
+                    {{ loading ? 'Enviando...' : 'Solicitar asesoría' }}
                 </button>
             </form>
-            <div *ngIf="enviado" class="alert success">
-                ✔ Mensaje enviado correctamente
+            <div *ngIf="enviado" class="alert-success">
+                Hemos recibido tu solicitud, pronto nos pondremos en contacto
             </div>
-            <div *ngIf="error" class="alert error">
-                ❌ Ocurrió un error al enviar el mensaje
+            <div *ngIf="error" class="alert-error">
+                Ocurrió un error al enviar la solicitud
             </div>
         </div>
     </div>

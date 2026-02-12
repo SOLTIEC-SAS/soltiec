@@ -82,6 +82,8 @@
 .value-card h3 {
   letter-spacing: 1px;
   margin-top: 5px;
+  color: #146582;
+  font-weight: bold;
 }
 
 .contador-accidentes {
