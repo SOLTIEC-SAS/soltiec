@@ -20,6 +20,17 @@
 .soltiec-section h1 {
     grid-column: 1 / -1;
 }
+.soltiec-section img{
+  width: clamp(120px, 18vw, 180px);
+  height: clamp(120px, 18vw, 180px);
+  object-fit: cover;
+  border-radius: 50%;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  display: block;
+  margin: 0 auto clamp(15px, 3.5vw, 20px) auto;
+  border: 4px solid #146582;
+  margin-bottom: 
+}
 
 .about-card {
     position: relative;
