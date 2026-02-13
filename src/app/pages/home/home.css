@@ -114,19 +114,19 @@
 }
 
 .tech {
-  background-image: url('https://raw.githubusercontent.com/SOLTIEC-SAS/banco-imagenes/main/Servicio_Tecnologia.png');
+  background-image: url('/assets/images/Servicio_Tecnologia.png');
 }
 
 .eng {
-  background-image: url('https://raw.githubusercontent.com/SOLTIEC-SAS/banco-imagenes/main/Servicio_Ingenieria.png');
+  background-image: url('/assets/images/Servicio_Ingenieria.png');
 }
 
 .energy {
-  background-image: url('https://raw.githubusercontent.com/SOLTIEC-SAS/banco-imagenes/main/Servicio_Energia.png');
+  background-image: url('/assets/images/Servicio_Energia.png');
 }
 
 .build {
-  background-image: url('https://raw.githubusercontent.com/SOLTIEC-SAS/banco-imagenes/main/Servicio_Construccion.png');
+  background-image: url('/assets/images/Servicio_Construccion.png');
 }
 
 .overlay {
