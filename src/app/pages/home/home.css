@@ -96,6 +96,7 @@
   }
 }
 
+
 .services-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -234,6 +235,10 @@
   font-weight: bold;
   color: #146582;
 
+}
+
+.contact p{
+  text-align: center ;
 }
 
 @media (max-width: 900px) {

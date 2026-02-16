@@ -1,5 +1,5 @@
 .about {
-    max-width: 1000px;
+
     display: block;
     margin: auto;
 }
@@ -18,7 +18,7 @@
     margin: 0 auto;
 }
 
-.soltiec-section h1 {
+.soltiec-section h2 {
     grid-column: 1 / -1;
 }
 
@@ -138,6 +138,76 @@
     letter-spacing: 1px;
     text-transform: uppercase;
 }
+
+
+
+
+
+
+
+
+.timeline {
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 40px;
+}
+
+.timeline-step {
+    background: #F0F8FF;
+padding: clamp(8px, 1.5vw, 14px);
+    border-radius: 14px;
+    border: 2px solid #146582;
+    transition: .25s;
+}
+
+.timeline-step:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, .08);
+}
+
+.circle {
+    width: clamp(42px, 5vw, 54px);
+    height: clamp(42px, 5vw, 54px);
+    background: #146582;
+    color: #FFFFFF;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    margin: 0px auto 10px auto;
+    box-shadow: 0 6px 18px rgba(20, 101, 130, .25);
+}
+
+.timeline-step p {
+    margin: 0px;
+    text-align: center;
+}
+
+
+
+
+
+
+.closing-section{
+   border-top: solid 2px #146582;
+}
+
+/* ancho controlado tipo empresa seria */
+.closing-container{
+margin: clamp(15px, 4vw, 30px) auto;
+  text-align: center;
+}
+
+
+
+
+
+
+
+
+
 
 @media (max-width: 900px) {
     .soltiec-section {
