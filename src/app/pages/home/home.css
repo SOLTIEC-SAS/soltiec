@@ -132,7 +132,7 @@
 .overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0, 90, 110, 0.8);
+  background: rgba(20, 101, 130, 0.8);
   color: white;
   display: flex;
   flex-direction: column;
@@ -189,4 +189,90 @@ font-size: clamp(19px, 3.2vw, 25px);
   .service-card{
     margin: 1% 0%;
   }
+}
+
+
+
+
+
+
+
+
+
+
+.carousel-inner {
+  position: relative;
+}
+
+.carousel-item {
+
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.9s ease-in-out;
+  pointer-events: none;
+}
+
+.carousel-item.active {
+  position: relative;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+
+
+.carousel-item img {
+  height: clamp(260px, 45vw, 480px);
+  display: block;
+  margin: auto;
+  
+}
+
+
+.carousel-caption {
+  position: absolute;
+  left: 50%;
+  bottom: clamp(12px, 3vw, 28px);
+  transform: translateX(-50%);
+  background: rgba(20, 101, 130, 0.8);
+  backdrop-filter: blur(4px);
+  color: white;
+  padding: clamp(10px, 1.6vw, 18px) clamp(14px, 2vw, 26px);
+  border-radius: 14px;
+  min-width: 200px;
+}
+
+.carousel-caption p {
+color: #FFFFFF;
+text-align: center;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.btn-whatsapp {
+    display: block;
+    margin: 20px auto auto auto;
+    padding: clamp(6px, 0.8vw, 10px) clamp(12px, 1.5vw, 20px);
+    background-color: #146582;
+    color: #FFFFFF;
+    text-decoration: none;
+    border-radius: clamp(6px, 1vw, 14px);
+    transition: 0.3s ease;
+    max-width: 280px;
+    text-align: center;
+    border: solid 2px #146582;
+}
+.btn-whatsapp:hover {
+    background-color: #FFFFFF;
+    font-weight: bold;
+    color: #146582;
+
 }

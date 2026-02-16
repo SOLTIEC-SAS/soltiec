@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 
@@ -8,8 +8,27 @@ import { RouterModule } from '@angular/router';
   templateUrl: './home.html',
   styleUrl: './home.css',
 })
-export class Home {
-    constructor(private title: Title) {
+export class Home implements OnInit, OnDestroy {
+
+  currentSlide = 0;
+  totalSlides = 4;
+  interval: any;
+
+  constructor(
+    private title: Title,
+    private cdr: ChangeDetectorRef
+  ) {
     this.title.setTitle('INICIO | SOLTIEC SAS');
+  }
+
+  ngOnInit() {
+    this.interval = setInterval(() => {
+      this.currentSlide = (this.currentSlide + 1) % this.totalSlides;
+      this.cdr.detectChanges();
+    }, 5000);
+  }
+
+  ngOnDestroy() {
+    clearInterval(this.interval);
   }
 }
