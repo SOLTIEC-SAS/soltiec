@@ -110,7 +110,7 @@
   background-repeat: no-repeat;
   margin: 10px;
 
-  
+
 }
 
 .tech {
@@ -144,7 +144,7 @@
 }
 
 .overlay h2 {
-font-size: clamp(19px, 3.2vw, 25px);
+  font-size: clamp(19px, 3.2vw, 25px);
   margin-bottom: 15px;
   letter-spacing: 1px;
   font-weight: bold;
@@ -172,34 +172,6 @@ font-size: clamp(19px, 3.2vw, 25px);
   border: #146582;
 }
 
-
-@media (max-width: 900px) {
-   .slider {
-    height: 60vh;
-   }
-
-  .services-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .service-card {
-    height: 350px;
-  }
-
-  .service-card{
-    margin: 1% 0%;
-  }
-}
-
-
-
-
-
-
-
-
-
-
 .carousel-inner {
   position: relative;
 }
@@ -218,15 +190,12 @@ font-size: clamp(19px, 3.2vw, 25px);
   pointer-events: auto;
 }
 
-
-
 .carousel-item img {
   height: clamp(260px, 45vw, 480px);
   display: block;
   margin: auto;
-  
-}
 
+}
 
 .carousel-caption {
   position: absolute;
@@ -242,37 +211,55 @@ font-size: clamp(19px, 3.2vw, 25px);
 }
 
 .carousel-caption p {
-color: #FFFFFF;
-text-align: center;
+  color: #FFFFFF;
+  text-align: center;
 }
-
-
-
-
-
-
-
-
-
-
-
 
 .btn-whatsapp {
-    display: block;
-    margin: 20px auto auto auto;
-    padding: clamp(6px, 0.8vw, 10px) clamp(12px, 1.5vw, 20px);
-    background-color: #146582;
-    color: #FFFFFF;
-    text-decoration: none;
-    border-radius: clamp(6px, 1vw, 14px);
-    transition: 0.3s ease;
-    max-width: 280px;
-    text-align: center;
-    border: solid 2px #146582;
+  display: block;
+  margin: 20px auto auto auto;
+  padding: clamp(6px, 0.8vw, 10px) clamp(12px, 1.5vw, 20px);
+  background-color: #146582;
+  color: #FFFFFF;
+  text-decoration: none;
+  border-radius: clamp(6px, 1vw, 14px);
+  transition: 0.3s ease;
+  max-width: 280px;
+  text-align: center;
+  border: solid 2px #146582;
 }
+
 .btn-whatsapp:hover {
-    background-color: #FFFFFF;
-    font-weight: bold;
-    color: #146582;
+  background-color: #FFFFFF;
+  font-weight: bold;
+  color: #146582;
+
+}
+
+@media (max-width: 900px) {
+  .slider {
+    height: 60vh;
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .service-card {
+    height: 350px;
+  }
+
+  .service-card {
+    margin: 1% 0%;
+  }
+
+
+  .carousel-caption {
+    bottom: 0;
+    left: 0;
+    right: auto;
+    transform: none;
+    border-radius: 0 14px 0 0;
+  }
 
 }
