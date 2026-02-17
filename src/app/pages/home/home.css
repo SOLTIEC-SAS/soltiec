@@ -191,7 +191,7 @@
 }
 
 .carousel-item img {
-  height: 40vw;
+  height: 35vw;
   display: block;
   margin: auto;
 }
@@ -255,6 +255,10 @@
   .service-card {
     margin: 1% 0%;
   }
+.carousel-item img {
+  height: 45vw;
+}
+
   .carousel-caption {
     bottom: 0;
     left: 0;
