@@ -189,26 +189,6 @@ padding: clamp(8px, 1.5vw, 14px);
 
 
 
-
-.closing-section{
-   border-top: solid 2px #146582;
-}
-
-/* ancho controlado tipo empresa seria */
-.closing-container{
-margin: clamp(15px, 4vw, 30px) auto;
-  text-align: center;
-}
-
-
-
-
-
-
-
-
-
-
 @media (max-width: 900px) {
     .soltiec-section {
         grid-template-columns: 1fr;
