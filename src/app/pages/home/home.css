@@ -178,7 +178,6 @@
 }
 
 .carousel-item {
-
   inset: 0;
   opacity: 0;
   transition: opacity 0.9s ease-in-out;
@@ -192,10 +191,9 @@
 }
 
 .carousel-item img {
-  height: clamp(260px, 45vw, 480px);
+  height: 40vw;
   display: block;
   margin: auto;
-
 }
 
 .carousel-caption {
@@ -243,7 +241,7 @@
 
 @media (max-width: 900px) {
   .slider {
-    height: 60vh;
+    height: 50vh;
   }
 
   .services-grid {
@@ -257,8 +255,6 @@
   .service-card {
     margin: 1% 0%;
   }
-
-
   .carousel-caption {
     bottom: 0;
     left: 0;
