@@ -46,7 +46,7 @@
 
 .btn-whatsapp:hover {
     background-color: #FFFFFF;
-    font-weight: bold;
+font-weight: bold;
     color: #146582;
 
 }
@@ -143,7 +143,7 @@ textarea.form-control {
     border: solid 2px #146582;
     border-radius: 6px;
     cursor: pointer;
-    min-width: 160px;
+    min-width: 180px;
     transition: 0.3s ease;
     display: block;
     margin: clamp(10px, 1.2vw, 25px) auto;
@@ -151,6 +151,7 @@ textarea.form-control {
 
 .btn-enviar:hover {
     background-color: #FFFFFF;
+    font-weight: bold;
     color: #146582;
 }
 

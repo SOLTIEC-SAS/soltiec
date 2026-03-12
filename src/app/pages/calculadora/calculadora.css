@@ -1,138 +1,161 @@
-*{
-box-sizing:border-box;
-margin:0;
-padding:0;
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
 }
 
-:host{
-display:block;
-padding:25px 15px;
-background:#f4f6f8;
-font-family:Arial;
+.form-grid label {
+    font-weight: bold;
+    color: #146582;
 }
 
-.form-section,
-.results-section,
-.roi-section{
-
-max-width:1100px;
-margin:auto;
-
-background:white;
-
-padding:25px;
-
-border-radius:10px;
-
-box-shadow:0 3px 12px rgba(0,0,0,0.08);
-
-margin-bottom:30px;
-
+.results-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
 }
 
-.form-grid{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:15px;
-}
-
-.results-grid{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:15px;
-}
-
-.form-group{
-display:flex;
-flex-direction:column;
+.form-group {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
 }
 
 .form-group input,
-.form-group select{
-
-padding:10px;
-
-border-radius:6px;
-
-border:1px solid #d1d5db;
-
-font-size:14px;
-
-line-height:1.3;
-
+.form-group select {
+    padding: clamp(6px, 0.8vw, 10px) clamp(12px, 1.5vw, 20px);
+    border-radius: clamp(6px, 1vw, 14px);
+    border: 2px solid #146582;
+    font-size: clamp(15px, 1.2vw, 18px);
+    width: 100%;
 }
 
-.result-card{
-background:#f8fafc;
-padding:15px;
-border-radius:8px;
-border:1px solid #e2e8f0;
-text-align:center;
+
+.button-section {
+    margin: clamp(10px, 2vw, 20px) 0;
 }
 
-.chart-container{
-width:100%;
-max-width:900px;
-margin:30px auto;
+.button-section button {
+    display: block;
+    margin: auto;
+    background-color: #146582;
+    color: #FFFFFF;
+    padding: clamp(6px, 0.8vw, 10px) clamp(12px, 1.5vw, 20px);
+    border: solid 2px #146582;
+    border-radius: 6px;
+    cursor: pointer;
+    min-width: 180px;
+    transition: 0.3s ease;
 }
 
-.chart-container canvas{
-width:100%!important;
-height:auto!important;
-aspect-ratio:2/1;
+.button-section button:hover {
+    background-color: #FFFFFF;
+    font-weight: bold;
+    color: #146582;
 }
 
-.roi-metrics{
-display:flex;
-justify-content:center;
-gap:20px;
-margin-top:20px;
+
+.result-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: clamp(16px, 1.8vw, 20px);
+    text-align: center;
+    background: #F8FAFC;
+    padding: 15px;
+    border-radius: 8px;
+    border: 2px solid #146582;
+    color: #146582;
+    min-height: 110px;
 }
 
-.roi-box{
-padding:15px;
-border-radius:8px;
-border:1px solid #e2e8f0;
-text-align:center;
+
+.result-card span {
+    font-size: clamp(15px, 1.2vw, 18px);
+    color: #146582;
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.roi-positive{
-background:#e8f7ee;
-color:#15803d;
+
+
+.chart-container {
+    width: 100%;
+    max-width: 900px;
+    margin: 30px auto;
 }
 
-.roi-negative{
-background:#fde8e8;
-color:#b91c1c;
+.chart-container canvas {
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 2/1;
 }
 
-.pdf-section{
-text-align:center;
-margin-top:20px;
+.roi-metrics {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
 }
 
-.pdf-button{
-background:#059669;
-color:white;
-border:none;
-padding:12px 28px;
-border-radius:8px;
-cursor:pointer;
+.roi-box {
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+    text-align: center;
 }
 
-@media(max-width:900px){
-
-.form-grid{
-grid-template-columns:1fr;
+.roi-positive {
+    background: #e8f7ee;
+    color: #15803d;
 }
 
-.results-grid{
-grid-template-columns:1fr;
+.roi-negative {
+    background: #fde8e8;
+    color: #b91c1c;
 }
 
-.roi-metrics{
-flex-direction:column;
-align-items:center;
+.pdf-section {
+    text-align: center;
+    margin-top: 20px;
 }
+
+.pdf-button {
+    display: block;
+    margin: auto;
+    background-color: #146582;
+    color: #FFFFFF;
+    padding: clamp(6px, 0.8vw, 10px) clamp(12px, 1.5vw, 20px);
+    border: solid 2px #146582;
+    border-radius: 6px;
+    cursor: pointer;
+    min-width: 180px;
+
+    transition: 0.3s ease;
+}
+
+.pdf-button:hover {
+    background-color: #FFFFFF;
+    font-weight: bold;
+    color: #146582;
+}
+
+@media(max-width:900px) {
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .results-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .roi-metrics {
+        flex-direction: column;
+        align-items: center;
+    }
 
 }
