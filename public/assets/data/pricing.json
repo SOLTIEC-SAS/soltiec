@@ -1,0 +1,29 @@
+{
+  "ranges": [
+    {
+      "min_kwp": 0,
+      "max_kwp": 10,
+      "price": 10000000
+    },
+    {
+      "min_kwp": 10,
+      "max_kwp": 15,
+      "price": 15000000
+    },
+    {
+      "min_kwp": 15,
+      "max_kwp": 30,
+      "price": 100000000
+    },
+    {
+      "min_kwp": 30,
+      "max_kwp": 50,
+      "price": 160000000
+    },
+    {
+      "min_kwp": 50,
+      "max_kwp": 100,
+      "price": 300000000
+    }
+  ]
+}
