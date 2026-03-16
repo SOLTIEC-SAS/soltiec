@@ -1,126 +1,173 @@
 <section class="main-section">
-    <h1>CALCULADORA SISTEMA SOLAR FOTOVOLTAICO</h1>
-    <p>
-        Descubre cómo la energía solar puede ayudarte a reducir tu factura de electricidad. Ingresa algunos datos de tu
-        consumo y obtén una estimación del sistema solar fotovoltaico que necesitas, incluyendo la potencia a instalar,
-        el número de paneles y la inversión aproximada.
-    </p>
-    <div class="calculator-instructions">
-        <h2>¿CÓMO USAR LA CALCULADORA?</h2>
-        <p><strong>1.</strong> Ingresa el consumo en kWh de tus últimas tres facturas de energía.</p>
-        <p><strong>2.</strong> Selecciona el estrato de la vivienda o negocio.</p>
-        <p><strong>3.</strong> Elige tu departamento y ciudad.</p>
-        <p><strong>4.</strong> Define el porcentaje de demanda que deseas cubrir con energía solar.</p>
-        <p><strong>5.</strong> Haz clic en <strong>"Calcular sistema"</strong> para ver la estimación del sistema
-            fotovoltaico.</p>
 
-    </div>
+<h1>CALCULADORA SISTEMA SOLAR FOTOVOLTAICO</h1>
+
+<p>
+Descubre cómo la energía solar puede ayudarte a reducir tu factura de electricidad. Ingresa algunos datos de tu
+consumo y obtén una estimación del sistema solar fotovoltaico que necesitas, incluyendo la potencia a instalar,
+el número de paneles y la inversión aproximada.
+</p>
+
+<div class="calculator-instructions">
+
+<h2>¿CÓMO USAR LA CALCULADORA?</h2>
+
+<p><strong>1.</strong> Ingresa el consumo en kWh de tus últimas tres facturas de energía.</p>
+<p><strong>2.</strong> Selecciona el estrato de la vivienda o negocio.</p>
+<p><strong>3.</strong> Elige tu departamento y ciudad.</p>
+<p><strong>4.</strong> Define el porcentaje de demanda que deseas cubrir con energía solar.</p>
+<p><strong>5.</strong> Haz clic en <strong>"Calcular sistema"</strong> para ver la estimación del sistema fotovoltaico.</p>
+
+</div>
+
 </section>
+
+
 <section class="form-section">
-    <h2>DATOS INICIALES</h2>
-    <div class="form-grid">
-        <div class="form-group">
-            <label>Factura 1 (kWh)</label>
-            <input type="number" [(ngModel)]="fact1" placeholder="Consumo kWh">
-        </div>
-        <div class="form-group">
-            <label>Factura 2 (kWh)</label>
-            <input type="number" [(ngModel)]="fact2" placeholder="Consumo kWh">
-        </div>
-        <div class="form-group">
-            <label>Factura 3 (kWh)</label>
-            <input type="number" [(ngModel)]="fact3" placeholder="Consumo kWh">
-        </div>
-        <div class="form-group">
-            <label>Estrato</label>
-            <select [(ngModel)]="estrato">
-                <option [value]="1">1</option>
-                <option [value]="2">2</option>
-                <option [value]="3">3</option>
-                <option [value]="4">4</option>
-                <option [value]="5">5</option>
-                <option [value]="6">6</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label>Departamento</label>
-            <select [(ngModel)]="department" (change)="onDepartmentChange()">
-                <option value="">Selecciona un departamento</option>
-                <option *ngFor="let d of departments" [value]="d">
-                    {{d}}
-                </option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label>Ciudad</label>
-            <select [(ngModel)]="city" (change)="onCityChange()">
-                <option value="">Selecciona una ciudad</option>
-                <option *ngFor="let c of cities" [value]="c">
-                    {{c}}
-                </option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label>Porcentaje de demanda a cubrir</label>
-            <select [(ngModel)]="coverage">
-                <option [value]="50">50%</option>
-                <option [value]="70">70%</option>
-                <option [value]="80">80%</option>
-                <option [value]="100">100%</option>
-            </select>
-        </div>
-    </div>
-    <div class="button-section">
-        <button (click)="calculate()">Calcular sistema</button>
-    </div>
+
+<h2>DATOS INICIALES</h2>
+
+<div class="form-grid">
+
+<div class="form-group">
+<label>Factura 1 (kWh)</label>
+<input type="number" [(ngModel)]="fact1" [ngClass]="{'input-error': submitted && !fact1}">
+</div>
+
+<div class="form-group">
+<label>Factura 2 (kWh)</label>
+<input type="number" [(ngModel)]="fact2" [ngClass]="{'input-error': submitted && !fact2}">
+</div>
+
+<div class="form-group">
+<label>Factura 3 (kWh)</label>
+<input type="number" [(ngModel)]="fact3" [ngClass]="{'input-error': submitted && !fact3}">
+</div>
+
+<div class="form-group">
+<label>Estrato</label>
+<select [(ngModel)]="estrato">
+<option [value]="1">1</option>
+<option [value]="2">2</option>
+<option [value]="3">3</option>
+<option [value]="4">4</option>
+<option [value]="5">5</option>
+<option [value]="6">6</option>
+<option value="residencial">Residencial</option>
+<option value="comercial">Comercial</option>
+</select>
+</div>
+
+<div class="form-group">
+<label>Departamento</label>
+<select [(ngModel)]="department" (change)="onDepartmentChange()" [ngClass]="{'input-error': submitted && !department}">
+<option value="">Selecciona un departamento</option>
+<option *ngFor="let d of departments" [value]="d">{{d}}</option>
+</select>
+</div>
+
+<div class="form-group">
+<label>Ciudad</label>
+<select [(ngModel)]="city" (change)="onCityChange()" [ngClass]="{'input-error': submitted && !city}">
+<option value="">Selecciona una ciudad</option>
+<option *ngFor="let c of cities" [value]="c">{{c}}</option>
+</select>
+</div>
+
+<div class="form-group">
+<label>Porcentaje de demanda a cubrir</label>
+<select [(ngModel)]="coverage">
+<option [value]="50">50%</option>
+<option [value]="70">70%</option>
+<option [value]="80">80%</option>
+<option [value]="100">100%</option>
+</select>
+</div>
+
+</div>
+
+<div class="button-section">
+<button (click)="calculate()">Calcular sistema</button>
+
+<div *ngIf="errorMessage" class="form-error">
+{{errorMessage}}
+</div>
+
+</div>
+
 </section>
+
+
 <section *ngIf="results" class="results-section">
-    <h2>RESULTADOS</h2>
-    <div class="results-grid">
-        <div class="result-card">
-            <span>Potencia a instalar: </span>
-            <strong>{{formatNumber(results.systemSize)}} kWp</strong>
-        </div>
-        <div class="result-card">
-            <span>Cantidad de paneles: </span>
-            <strong>{{results.panels}}</strong>
-        </div>
-        <div class="result-card">
-            <span>Área requerida en techo: </span>
-            <strong>{{formatNumber(results.roofArea)}} m²</strong>
-        </div>
-        <div class="result-card">
-            <span>CO2 evitado al año: </span>
-            <strong>{{formatNumber(results.co2)}} kg</strong>
-        </div>
-        <div class="result-card">
-            <span>Inversión inicial: </span>
-            <strong>{{formatCurrency(results.investment)}}</strong>
-        </div>
-        <div class="result-card">
-            <span>Factura mensual estimada: </span>
-            <strong>{{formatCurrency(results.monthlyCost)}}</strong>
-        </div>
-    </div>
+
+<h2>RESULTADOS</h2>
+
+<div class="results-grid">
+
+<div class="result-card">
+<span>Potencia a instalar:</span>
+<strong>{{formatNumber(results.systemSize)}} kWp</strong>
+</div>
+
+<div class="result-card">
+<span>Cantidad de paneles:</span>
+<strong>{{results.panels}}</strong>
+</div>
+
+<div class="result-card">
+<span>Área requerida en techo:</span>
+<strong>{{formatNumber(results.roofArea)}} m²</strong>
+</div>
+
+<div class="result-card">
+<span>CO2 evitado al año:</span>
+<strong>{{formatNumber(results.co2)}} kg</strong>
+</div>
+
+<div class="result-card">
+<span>Inversión inicial:</span>
+<strong>{{formatCurrency(results.investment)}}</strong>
+</div>
+
+<div class="result-card">
+<span>Factura mensual estimada:</span>
+<strong>{{formatCurrency(results.monthlyCost)}}</strong>
+</div>
+
+</div>
+
 </section>
+
+
 <section *ngIf="roiData" class="roi-section">
-    <h2>RETORNO DE INVERSIÓN</h2>
-    <div class="chart-container">
-        <canvas id="roiChart"></canvas>
-    </div>
-    <div class="roi-metrics">
-        <div class="roi-box">
-            <span>Payback estimado: </span>
-            <strong>{{paybackLabel}}</strong>
-        </div>
-        <div class="roi-box" [class.roi-positive]="roi10>0" [class.roi-negative]="roi10<=0">
-            <span>Retorno acumulado 10 años: </span>
-            <strong>{{formatCurrency(roi10)}}</strong>
-        </div>
-    </div>
+
+<h2>RETORNO DE INVERSIÓN</h2>
+
+<div class="chart-container">
+<canvas id="roiChart"></canvas>
+</div>
+
+<div class="roi-metrics">
+
+<div class="roi-box">
+<span>Payback estimado:</span>
+<strong>{{paybackLabel}}</strong>
+</div>
+
+<div class="roi-box" [class.roi-positive]="roi10>0" [class.roi-negative]="roi10<=0">
+<span>Retorno acumulado 10 años:</span>
+<strong>{{formatCurrency(roi10)}}</strong>
+</div>
+
+</div>
+
 </section>
+
+
 <div *ngIf="results" class="pdf-section">
-    <button (click)="generatePDF()" class="pdf-button">
-        Generar PDF
-    </button>
+
+<button (click)="generatePDF()" class="pdf-button">
+Generar PDF
+</button>
+
 </div>

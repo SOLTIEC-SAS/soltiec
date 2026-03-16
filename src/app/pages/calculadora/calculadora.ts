@@ -14,11 +14,15 @@ import autoTable from 'jspdf-autotable';
     templateUrl: './calculadora.html',
     styleUrl: './calculadora.css'
 })
-
 export class Calculadora implements OnInit {
+
     constructor(private http: HttpClient, private title: Title) {
         this.title.setTitle('CALCULADORA SSFV | SOLTIEC SAS');
     }
+
+    /* =========================
+       VARIABLES
+    ========================== */
 
     fact1: any;
     fact2: any;
@@ -27,15 +31,19 @@ export class Calculadora implements OnInit {
     department = '';
     city = '';
     estrato = 3;
-    coverage = 100
+    coverage = 100;
+
     departments: any[] = [];
     cities: any[] = [];
     cityData: any = {};
     selectedCityData: any = null;
+
     results: any = null;
     roiData: any = null;
+
     roi10 = 0;
     paybackLabel = '';
+
     chart: any;
     pricingRanges: any[] = [];
 
@@ -48,31 +56,49 @@ export class Calculadora implements OnInit {
         6: 1100
     };
 
+    /* =========================
+       INIT
+    ========================== */
+
     ngOnInit() {
+
         this.http.get<any>('assets/data/pricing.json')
             .subscribe(data => {
                 this.pricingRanges = data.ranges;
             });
+
         this.http.get<any>('assets/data/cities.json')
             .subscribe(data => {
+
                 this.cityData = data;
+
                 const deps = new Set<string>();
+
                 Object.values(this.cityData).forEach((item: any) => {
                     deps.add(item.departamento);
                 });
+
                 this.departments = Array.from(deps).sort();
             });
     }
-    onDepartmentChange() {
-        this.cities = [];
-        Object.values(this.cityData).forEach((item: any) => {
 
+    /* =========================
+       UBICACIÓN
+    ========================== */
+
+    onDepartmentChange() {
+
+        this.cities = [];
+
+        Object.values(this.cityData).forEach((item: any) => {
             if (item.departamento === this.department) {
                 this.cities.push(item.municipio);
             }
         });
     }
+
     onCityChange() {
+
         this.selectedCityData = Object.values(this.cityData).find(
             (item: any) =>
                 item.departamento === this.department &&
@@ -80,17 +106,29 @@ export class Calculadora implements OnInit {
         );
     }
 
+    /* =========================
+       CÁLCULO SISTEMA
+    ========================== */
+
     calculate() {
+
         const avg = (this.fact1 + this.fact2 + this.fact3) / 3;
         const tarifa = this.tarifasEstrato[this.estrato];
         const monthlyCost = avg * tarifa;
+
         const daily = avg / 30;
         const hsp = this.selectedCityData?.hsp;
+
         const systemSize = (daily / hsp) * (this.coverage / 100);
+
         const kwp = Number(systemSize.toFixed(2));
+
         const panels = Math.ceil((kwp * 1000) / 575);
+
         const investment = this.getPriceFromRange(kwp);
+
         const roofArea = panels * 2.4;
+
         const co2 = avg * 12 * 0.164;
 
         this.results = {
@@ -106,48 +144,80 @@ export class Calculadora implements OnInit {
     }
 
     getPriceFromRange(kwp: number) {
+
         for (let r of this.pricingRanges) {
             if (kwp >= r.min_kwp && kwp < r.max_kwp) {
                 return r.price;
             }
         }
+
         return 0;
     }
+
+    /* =========================
+       ROI
+    ========================== */
+
     calculateROI(investment: number, monthlyCost: number) {
+
         const annual = monthlyCost * 12;
+
         let cumulative = -investment;
-        const years = [];
-        const cumulativeData = [];
-        const savings = [];
-        const investmentBar = [];
+
+        const years: number[] = [];
+        const cumulativeData: number[] = [];
+        const savings: number[] = [];
+        const investmentBar: number[] = [];
+
         for (let i = 0; i <= 20; i++) {
+
             years.push(i);
+
             if (i === 0) {
+
                 cumulativeData.push(-investment);
                 savings.push(0);
                 investmentBar.push(-investment);
+
             } else {
-                cumulative += annual * (0.9 ** i);//Depreciación
+
+                cumulative += annual * (0.9 ** i);
+
                 cumulativeData.push(cumulative);
                 savings.push(annual);
                 investmentBar.push(0);
             }
         }
+
         const payback = cumulativeData.findIndex(v => v >= 0);
+
         this.paybackLabel =
             payback === -1 ? 'No recupera la inversión' : payback + ' años';
+
         this.roi10 = cumulativeData[10];
+
         this.roiData = {
             years,
             cumulativeData,
             savings,
             investmentBar
         };
+
         setTimeout(() => this.drawChart(), 50);
     }
+
+    /* =========================
+       GRÁFICA
+    ========================== */
+
     drawChart() {
+
         const ctx = document.getElementById('roiChart') as HTMLCanvasElement;
+
+        if (!ctx) return;
+
         if (this.chart) this.chart.destroy();
+
         this.chart = new Chart(ctx, {
             data: {
                 labels: this.roiData.years,
@@ -182,12 +252,9 @@ export class Calculadora implements OnInit {
         });
     }
 
-
-
-
-
-
-
+    /* =========================
+       GENERAR PDF
+    ========================== */
 
 generatePDF() {
 
@@ -224,6 +291,7 @@ pdf.addImage(logo,'PNG',15,headerY-imgHeight/2,imgWidth,imgHeight);
 pdf.setFont('helvetica','bold');
 pdf.setFontSize(10);
 pdf.setTextColor(20,101,130);
+
 pdf.text(`Fecha: ${formattedDate}`,pageWidth-15,headerY,{align:'right'});
 
 pdf.setDrawColor(200,200,200);
@@ -249,7 +317,7 @@ pdf.text(`© ${yearFull}`,pageWidth/2,pageHeight-12,{align:'center'});
 
 };
 
-/* FILA TITULO + VALOR */
+/* FILA */
 
 const drawRow = (label:string,value:string,y:number) => {
 
@@ -263,15 +331,11 @@ pdf.text(value,85,y);
 
 logo.onload = () => {
 
-
-
-
-
-/* -------- PAGINA 1 -------- */
+/* ========================= */
+/* PAGINA 1 */
+/* ========================= */
 
 drawHeader();
-
-/* TITULO */
 
 pdf.setFont('helvetica','bold');
 pdf.setFontSize(18);
@@ -283,8 +347,6 @@ pdf.setTextColor(0,0,0);
 
 let y = 65;
 
-/* UBICACION */
-
 drawRow('Departamento:', this.department || '-', y); y+=8;
 drawRow('Ciudad:', this.city || '-', y); y+=8;
 drawRow('Horas sol pico (HSP):', `${this.formatNumber(this.selectedCityData?.hsp || 0)} h`, y); y+=8;
@@ -292,8 +354,6 @@ drawRow('Horas sol pico (HSP):', `${this.formatNumber(this.selectedCityData?.hsp
 pdf.setDrawColor(220,220,220);
 pdf.line(20,y,190,y);
 y+=6;
-
-/* RESULTADOS */
 
 drawRow('Potencia a instalar:',`${this.formatNumber(this.results.systemSize)} kWp`,y); y+=8;
 drawRow('Cantidad de paneles:',`${this.results.panels}`,y); y+=8;
@@ -303,10 +363,6 @@ drawRow('Inversión inicial:',`${this.formatCurrency(this.results.investment)}`,
 drawRow('Factura mensual estimada:',`${this.formatCurrency(this.results.monthlyCost)}`,y); y+=8;
 drawRow('Payback estimado:',`${this.paybackLabel}`,y); y+=8;
 drawRow('Retorno acumulado 10 años:',`${this.formatCurrency(this.roi10)}`,y); y+=12;
-
-
-
-
 
 /* GRAFICA */
 
@@ -333,11 +389,14 @@ setTimeout(()=>{
 
 const img = canvas.toDataURL('image/png');
 pdf.addImage(img,'PNG',15,y,180,90);
+
 chart.destroy();
 
 drawFooter();
 
-/* -------- PAGINA 2 -------- */
+/* ========================= */
+/* PAGINA 2 */
+/* ========================= */
 
 pdf.addPage();
 drawHeader();
@@ -363,7 +422,9 @@ styles:{halign:'center'}
 
 drawFooter();
 
-/* -------- PAGINA 3 -------- */
+/* ========================= */
+/* PAGINA 3 */
+/* ========================= */
 
 pdf.addPage();
 drawHeader();
@@ -391,19 +452,14 @@ condiciones.forEach(item => {
 
 const lines = pdf.splitTextToSize(item,160);
 
-/* VIÑETA */
-
 pdf.text("•",20,yCond);
 
-/* TEXTO JUSTIFICADO */
-
 pdf.text(lines,25,yCond,{maxWidth:160,align:'justify'});
-
-/* ESPACIADO */
 
 yCond += lines.length * 6 + 4;
 
 });
+
 /* FIRMA */
 
 const firmaWidth = 120;
@@ -420,12 +476,9 @@ pdf.save('reporte-sistema-solar.pdf');
 };
 
 }
-
-
-
-
-
-
+    /* =========================
+       FORMATOS
+    ========================== */
 
     formatCurrency(value: number) {
 
@@ -434,7 +487,9 @@ pdf.save('reporte-sistema-solar.pdf');
             currency: 'COP'
         });
     }
+
     formatNumber(value: number) {
+
         return value.toLocaleString('es-CO', {
             minimumFractionDigits: 2,
             maximumFractionDigits: 2
