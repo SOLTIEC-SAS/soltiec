@@ -46,7 +46,7 @@
 
 .btn-whatsapp:hover {
     background-color: #FFFFFF;
-font-weight: bold;
+    font-weight: bold;
     color: #146582;
 
 }
@@ -76,7 +76,7 @@ font-weight: bold;
 
 .contact-form ::placeholder {
     color: #146582;
-    font-size: clamp(14px, 0.95vw, 16px);
+    font-size: clamp(15px, 1.2vw, 18px);
 }
 
 
@@ -94,19 +94,17 @@ form {
 
 
 .form-group input {
-    font-size: clamp(14px, 0.95vw, 16px);
+    font-size: clamp(15px, 1.2vw, 18px);
     line-height: 1.6;
     text-align: justify;
-    background-color: #F0F8FF;
     max-height: 35px;
 
 }
 
 .form-group select {
-    font-size: clamp(14px, 0.95vw, 16px);
+    font-size: clamp(15px, 1.2vw, 18px);
     line-height: 1.6;
     text-align: justify;
-    background-color: #F0F8FF;
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -124,13 +122,13 @@ form {
     display: block;
     margin: auto;
     color: #146582;
+    font-size: clamp(15px, 1.2vw, 18px);
 }
 
 textarea.form-control {
     resize: none;
     overflow: hidden;
     box-sizing: border-box;
-    background-color: #F0F8FF;
 
 }
 
