@@ -38,28 +38,35 @@ export class Calculadora implements OnInit {
     cityData: any = {};
     selectedCityData: any = null;
 
+    
     results: any = null;
     roiData: any = null;
 
-roi10 = 0;
-paybackLabel = '';
-chart: any;
-pricingRanges: any[] = [];
+    roi10 = 0;
+    degradation=0.9;
+    paybackLabel = '';
+    chart: any;
+    pricingRanges: any[] = [];
 
 
 
-/* VALIDACIÓN FORMULARIO */
+    /* VALIDACIÓN FORMULARIO */
 
-submitted = false;
-errorMessage = '';
+    submitted = false;
+    errorMessage = '';
 
     tarifasEstrato: any = {
-        1: 600,
-        2: 700,
-        3: 800,
-        4: 900,
-        5: 1000,
-        6: 1100
+        /* RESIDENCIAL */
+        1: 366.25,
+        2: 439.50,
+        3: 622.63,
+        4: 732.50,
+        5: 879.00,
+        6: 879.00,
+        /* OTROS TIPOS */
+        comercial: 879.00,
+        industrial: 879.00
+
     };
 
     /* =========================
@@ -116,59 +123,59 @@ errorMessage = '';
        CÁLCULO SISTEMA
     ========================== */
 
-  calculate() {
+    calculate() {
 
-    this.submitted = true;
+        this.submitted = true;
 
-    if (
-        !this.fact1 ||
-        !this.fact2 ||
-        !this.fact3 ||
-        !this.department ||
-        !this.city ||
-        !this.selectedCityData
-    ) {
+        if (
+            !this.fact1 ||
+            !this.fact2 ||
+            !this.fact3 ||
+            !this.department ||
+            !this.city ||
+            !this.selectedCityData
+        ) {
 
-        this.errorMessage = 'Por favor completa todos los datos antes de calcular el sistema.';
-        return;
+            this.errorMessage = 'Por favor completa todos los datos antes de calcular el sistema.';
+            return;
 
+        }
+
+        this.errorMessage = '';
+
+        const avg = (this.fact1 + this.fact2 + this.fact3) / 3;
+
+        const tarifa = this.tarifasEstrato[this.estrato];
+
+        const monthlyCost = avg * tarifa;
+
+        const daily = avg / 30;
+
+        const hsp = this.selectedCityData?.hsp;
+
+        const systemSize = (daily / hsp) * (this.coverage / 100);
+
+        const kwp = Number(systemSize.toFixed(2));
+
+        const panels = Math.ceil((kwp * 1000) / 575);
+
+        const investment = this.getPriceFromRange(kwp);
+
+        const roofArea = systemSize * 8;
+
+        const co2 = avg * 12 * 0.164;
+
+        this.results = {
+            systemSize: kwp,
+            panels,
+            investment,
+            monthlyCost,
+            roofArea,
+            co2
+        };
+
+        this.calculateROI(investment, monthlyCost);
     }
-
-    this.errorMessage = '';
-
-    const avg = (this.fact1 + this.fact2 + this.fact3) / 3;
-
-    const tarifa = this.tarifasEstrato[this.estrato];
-
-    const monthlyCost = avg * tarifa;
-
-    const daily = avg / 30;
-
-    const hsp = this.selectedCityData?.hsp;
-
-    const systemSize = (daily / hsp) * (this.coverage / 100);
-
-    const kwp = Number(systemSize.toFixed(2));
-
-    const panels = Math.ceil((kwp * 1000) / 575);
-
-    const investment = this.getPriceFromRange(kwp);
-
-    const roofArea = panels * 2.4;
-
-    const co2 = avg * 12 * 0.164;
-
-    this.results = {
-        systemSize: kwp,
-        panels,
-        investment,
-        monthlyCost,
-        roofArea,
-        co2
-    };
-
-    this.calculateROI(investment, monthlyCost);
-}
 
 
 
@@ -188,53 +195,57 @@ errorMessage = '';
        ROI
     ========================== */
 
-    calculateROI(investment: number, monthlyCost: number) {
+calculateROI(investment: number, monthlyCost: number) {
 
-        const annual = monthlyCost * 12;
+    const annual = monthlyCost * 12;
 
-        let cumulative = -investment;
+    let cumulative = -investment;
 
-        const years: number[] = [];
-        const cumulativeData: number[] = [];
-        const savings: number[] = [];
-        const investmentBar: number[] = [];
+    const years: number[] = [];
+    const cumulativeData: number[] = [];
+    const savings: number[] = [];
+    const investmentBar: number[] = [];
 
-        for (let i = 0; i <= 20; i++) {
+    for (let i = 0; i <= 20; i++) {
 
-            years.push(i);
+        years.push(i);
 
-            if (i === 0) {
+        if (i === 0) {
 
-                cumulativeData.push(-investment);
-                savings.push(0);
-                investmentBar.push(-investment);
+            cumulativeData.push(-investment);
+            savings.push(0);
+            investmentBar.push(-investment);
 
-            } else {
+        } 
+else {
 
-                cumulative += annual * (0.9 ** i);
+    const yearlySavings = annual * (this.degradation ** i);  // degradación acumulada
 
-                cumulativeData.push(cumulative);
-                savings.push(annual);
-                investmentBar.push(0);
-            }
-        }
+    cumulative += yearlySavings;
 
-        const payback = cumulativeData.findIndex(v => v >= 0);
+    cumulativeData.push(cumulative);
+    savings.push(yearlySavings);
+    investmentBar.push(0);
 
-        this.paybackLabel =
-            payback === -1 ? 'No recupera la inversión' : payback + ' años';
-
-        this.roi10 = cumulativeData[10];
-
-        this.roiData = {
-            years,
-            cumulativeData,
-            savings,
-            investmentBar
-        };
-
-        setTimeout(() => this.drawChart(), 50);
+}
     }
+
+    const payback = cumulativeData.findIndex(v => v >= 0);
+
+    this.paybackLabel =
+        payback === -1 ? 'No recupera la inversión' : payback + ' años';
+
+    this.roi10 = cumulativeData[10];
+
+    this.roiData = {
+        years,
+        cumulativeData,
+        savings,
+        investmentBar
+    };
+
+    setTimeout(() => this.drawChart(), 50);
+}
 
     /* =========================
        GRÁFICA
@@ -286,226 +297,226 @@ errorMessage = '';
        GENERAR PDF
     ========================== */
 
-generatePDF() {
+    generatePDF() {
 
-const pdf = new jsPDF('p','mm','a4');
+        const pdf = new jsPDF('p', 'mm', 'a4');
 
-const logo = new Image();
-logo.src = 'assets/images/logo_soltiec_transparente.png';
+        const logo = new Image();
+        logo.src = 'assets/images/logo_soltiec_transparente.png';
 
-const firma = new Image();
-firma.src = 'assets/images/firma-correo-santiago-ramirez.png';
+        const firma = new Image();
+        firma.src = 'assets/images/firma-correo-santiago-ramirez.png';
 
-const pageWidth = pdf.internal.pageSize.width;
-const pageHeight = pdf.internal.pageSize.height;
+        const pageWidth = pdf.internal.pageSize.width;
+        const pageHeight = pdf.internal.pageSize.height;
 
-const today = new Date();
-const day = today.getDate();
-const yearShort = today.getFullYear().toString().slice(-2);
-const yearFull = today.getFullYear();
+        const today = new Date();
+        const day = today.getDate();
+        const yearShort = today.getFullYear().toString().slice(-2);
+        const yearFull = today.getFullYear();
 
-const months = ['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
-const month = months[today.getMonth()];
-const formattedDate = `${day}-${month}-${yearShort}`;
+        const months = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'];
+        const month = months[today.getMonth()];
+        const formattedDate = `${day}-${month}-${yearShort}`;
 
-const imgWidth = 40;
-const imgHeight = imgWidth / 3.34;
-const headerY = 16;
+        const imgWidth = 40;
+        const imgHeight = imgWidth / 3.34;
+        const headerY = 16;
 
-/* HEADER */
+        /* HEADER */
 
-const drawHeader = () => {
+        const drawHeader = () => {
 
-pdf.addImage(logo,'PNG',15,headerY-imgHeight/2,imgWidth,imgHeight);
+            pdf.addImage(logo, 'PNG', 15, headerY - imgHeight / 2, imgWidth, imgHeight);
 
-pdf.setFont('helvetica','bold');
-pdf.setFontSize(10);
-pdf.setTextColor(20,101,130);
+            pdf.setFont('helvetica', 'bold');
+            pdf.setFontSize(10);
+            pdf.setTextColor(20, 101, 130);
 
-pdf.text(`Fecha: ${formattedDate}`,pageWidth-15,headerY,{align:'right'});
+            pdf.text(`Fecha: ${formattedDate}`, pageWidth - 15, headerY, { align: 'right' });
 
-pdf.setDrawColor(200,200,200);
-pdf.line(15,30,pageWidth-15,30);
+            pdf.setDrawColor(200, 200, 200);
+            pdf.line(15, 30, pageWidth - 15, 30);
 
-};
+        };
 
-/* FOOTER */
+        /* FOOTER */
 
-const drawFooter = () => {
+        const drawFooter = () => {
 
-pdf.setDrawColor(200,200,200);
-pdf.line(15,pageHeight-30,pageWidth-15,pageHeight-30);
+            pdf.setDrawColor(200, 200, 200);
+            pdf.line(15, pageHeight - 30, pageWidth - 15, pageHeight - 30);
 
-pdf.setFont('helvetica','bold');
-pdf.setFontSize(10);
-pdf.setTextColor(20,101,130);
-pdf.text('SOLTIEC SAS',pageWidth/2,pageHeight-22,{align:'center'});
+            pdf.setFont('helvetica', 'bold');
+            pdf.setFontSize(10);
+            pdf.setTextColor(20, 101, 130);
+            pdf.text('SOLTIEC SAS', pageWidth / 2, pageHeight - 22, { align: 'center' });
 
-pdf.setFont('helvetica','normal');
-pdf.text('301 892 8866 · coordinador.proyectos@soltiec.co',pageWidth/2,pageHeight-17,{align:'center'});
-pdf.text(`© ${yearFull}`,pageWidth/2,pageHeight-12,{align:'center'});
+            pdf.setFont('helvetica', 'normal');
+            pdf.text('301 892 8866 · coordinador.proyectos@soltiec.co', pageWidth / 2, pageHeight - 17, { align: 'center' });
+            pdf.text(`© ${yearFull}`, pageWidth / 2, pageHeight - 12, { align: 'center' });
 
-};
+        };
 
-/* FILA */
+        /* FILA */
 
-const drawRow = (label:string,value:string,y:number) => {
+        const drawRow = (label: string, value: string, y: number) => {
 
-pdf.setFont('helvetica','bold');
-pdf.text(label,20,y);
+            pdf.setFont('helvetica', 'bold');
+            pdf.text(label, 20, y);
 
-pdf.setFont('helvetica','normal');
-pdf.text(value,85,y);
+            pdf.setFont('helvetica', 'normal');
+            pdf.text(value, 85, y);
 
-};
+        };
 
-logo.onload = () => {
+        logo.onload = () => {
 
-/* ========================= */
-/* PAGINA 1 */
-/* ========================= */
+            /* ========================= */
+            /* PAGINA 1 */
+            /* ========================= */
 
-drawHeader();
+            drawHeader();
 
-pdf.setFont('helvetica','bold');
-pdf.setFontSize(18);
-pdf.setTextColor(20,101,130);
-pdf.text('Reporte Sistema Solar Fotovoltaico',105,45,{align:'center'});
+            pdf.setFont('helvetica', 'bold');
+            pdf.setFontSize(18);
+            pdf.setTextColor(20, 101, 130);
+            pdf.text('Reporte Sistema Solar Fotovoltaico', 105, 45, { align: 'center' });
 
-pdf.setFontSize(12);
-pdf.setTextColor(0,0,0);
+            pdf.setFontSize(12);
+            pdf.setTextColor(0, 0, 0);
 
-let y = 65;
+            let y = 65;
 
-drawRow('Departamento:', this.department || '-', y); y+=8;
-drawRow('Ciudad:', this.city || '-', y); y+=8;
-drawRow('Horas sol pico (HSP):', `${this.formatNumber(this.selectedCityData?.hsp || 0)} h`, y); y+=8;
+            drawRow('Departamento:', this.department || '-', y); y += 8;
+            drawRow('Ciudad:', this.city || '-', y); y += 8;
+            drawRow('Horas sol pico (HSP):', `${this.formatNumber(this.selectedCityData?.hsp || 0)} h`, y); y += 8;
 
-pdf.setDrawColor(220,220,220);
-pdf.line(20,y,190,y);
-y+=6;
+            pdf.setDrawColor(220, 220, 220);
+            pdf.line(20, y, 190, y);
+            y += 6;
 
-drawRow('Potencia a instalar:',`${this.formatNumber(this.results.systemSize)} kWp`,y); y+=8;
-drawRow('Cantidad de paneles:',`${this.results.panels}`,y); y+=8;
-drawRow('Área requerida en techo:',`${this.formatNumber(this.results.roofArea)} m²`,y); y+=8;
-drawRow('CO2 evitado al año:',`${this.formatNumber(this.results.co2)} kg`,y); y+=8;
-drawRow('Inversión inicial:',`${this.formatCurrency(this.results.investment)}`,y); y+=8;
-drawRow('Factura mensual estimada:',`${this.formatCurrency(this.results.monthlyCost)}`,y); y+=8;
-drawRow('Payback estimado:',`${this.paybackLabel}`,y); y+=8;
-drawRow('Retorno acumulado 10 años:',`${this.formatCurrency(this.roi10)}`,y); y+=12;
+            drawRow('Potencia a instalar:', `${this.formatNumber(this.results.systemSize)} kWp`, y); y += 8;
+            drawRow('Cantidad de paneles:', `${this.results.panels}`, y); y += 8;
+            drawRow('Área requerida en techo:', `${this.formatNumber(this.results.roofArea)} m²`, y); y += 8;
+            drawRow('CO2 evitado al año:', `${this.formatNumber(this.results.co2)} kg`, y); y += 8;
+            drawRow('Inversión inicial:', `${this.formatCurrency(this.results.investment)}`, y); y += 8;
+            drawRow('Factura mensual estimada: ', `${this.formatCurrency(this.results.monthlyCost)}`, y); y += 8;
+            drawRow('Payback estimado: ', `${this.paybackLabel}`, y); y += 8;
+            drawRow('Retorno acumulado 10 años: ', `${this.formatCurrency(this.roi10)}`, y); y += 12;
 
-/* GRAFICA */
+            /* GRAFICA */
 
-const canvas = document.createElement('canvas');
-canvas.width = 1600;
-canvas.height = 800;
+            const canvas = document.createElement('canvas');
+            canvas.width = 1600;
+            canvas.height = 800;
 
-const ctx = canvas.getContext('2d');
+            const ctx = canvas.getContext('2d');
 
-const chart = new Chart(ctx!,{
-type:'bar',
-data:{
-labels:this.roiData.years,
-datasets:[
-{type:'bar',label:'Inversión inicial',data:this.roiData.investmentBar,backgroundColor:'#EF4444'},
-{type:'bar',label:'Ahorro anual',data:this.roiData.savings,backgroundColor:'#22C55E'},
-{type:'line',label:'Retorno acumulado',data:this.roiData.cumulativeData,borderColor:'#146582',borderWidth:4,tension:0.35}
-]
-},
-options:{responsive:false}
-});
+            const chart = new Chart(ctx!, {
+                type: 'bar',
+                data: {
+                    labels: this.roiData.years,
+                    datasets: [
+                        { type: 'bar', label: 'Inversión inicial', data: this.roiData.investmentBar, backgroundColor: '#EF4444' },
+                        { type: 'bar', label: 'Ahorro anual', data: this.roiData.savings, backgroundColor: '#22C55E' },
+                        { type: 'line', label: 'Retorno acumulado', data: this.roiData.cumulativeData, borderColor: '#146582', borderWidth: 4, tension: 0.35 }
+                    ]
+                },
+                options: { responsive: false }
+            });
 
-setTimeout(()=>{
+            setTimeout(() => {
 
-const img = canvas.toDataURL('image/png');
-pdf.addImage(img,'PNG',15,y,180,90);
+                const img = canvas.toDataURL('image/png');
+                pdf.addImage(img, 'PNG', 15, y, 180, 90);
 
-chart.destroy();
+                chart.destroy();
 
-drawFooter();
+                drawFooter();
 
-/* ========================= */
-/* PAGINA 2 */
-/* ========================= */
+                /* ========================= */
+                /* PAGINA 2 */
+                /* ========================= */
 
-pdf.addPage();
-drawHeader();
+                pdf.addPage();
+                drawHeader();
 
-pdf.setFont('helvetica','bold');
-pdf.setFontSize(18);
-pdf.setTextColor(20,101,130);
-pdf.text('Retorno acumulado por año',105,45,{align:'center'});
+                pdf.setFont('helvetica', 'bold');
+                pdf.setFontSize(18);
+                pdf.setTextColor(20, 101, 130);
+                pdf.text('Retorno acumulado por año', 105, 45, { align: 'center' });
 
-const tableData = this.roiData.years.map((year:number,i:number)=>[
-year,
-this.formatCurrency(this.roiData.cumulativeData[i])
-]);
+                const tableData = this.roiData.years.map((year: number, i: number) => [
+                    year,
+                    this.formatCurrency(this.roiData.cumulativeData[i])
+                ]);
 
-autoTable(pdf,{
-startY:60,
-head:[['Año','Retorno acumulado']],
-body:tableData,
-headStyles:{fillColor:[20,101,130],textColor:[255,255,255]},
-bodyStyles:{textColor:[20,101,130]},
-styles:{halign:'center'}
-});
+                autoTable(pdf, {
+                    startY: 60,
+                    head: [['Año', 'Retorno acumulado']],
+                    body: tableData,
+                    headStyles: { fillColor: [20, 101, 130], textColor: [255, 255, 255] },
+                    bodyStyles: { textColor: [20, 101, 130] },
+                    styles: { halign: 'center' }
+                });
 
-drawFooter();
+                drawFooter();
 
-/* ========================= */
-/* PAGINA 3 */
-/* ========================= */
+                /* ========================= */
+                /* PAGINA 3 */
+                /* ========================= */
 
-pdf.addPage();
-drawHeader();
+                pdf.addPage();
+                drawHeader();
 
-pdf.setFont('helvetica','bold');
-pdf.setFontSize(18);
-pdf.setTextColor(20,101,130);
-pdf.text('Condiciones del proyecto',105,45,{align:'center'});
+                pdf.setFont('helvetica', 'bold');
+                pdf.setFontSize(18);
+                pdf.setTextColor(20, 101, 130);
+                pdf.text('Condiciones del proyecto', 105, 45, { align: 'center' });
 
-pdf.setFont('helvetica','normal');
-pdf.setFontSize(12);
-pdf.setTextColor(0,0,0);
+                pdf.setFont('helvetica', 'normal');
+                pdf.setFontSize(12);
+                pdf.setTextColor(0, 0, 0);
 
-const condiciones = [
-"Los valores presentados en este documento corresponden a una estimación preliminar basada en la información suministrada.",
-"El valor final del proyecto puede variar una vez se realice un análisis técnico detallado del sitio de instalación.",
-"Cada sistema fotovoltaico requiere evaluación de condiciones estructurales, ubicación exacta, orientación e inclinación del sistema, así como revisión del sistema eléctrico existente.",
-"Para definir el alcance definitivo del proyecto es necesario realizar una visita técnica, levantar información en campo y desarrollar la ingeniería de detalle correspondiente.",
-"Posteriormente se elabora la propuesta técnica y económica final con el diseño definitivo del sistema y las condiciones completas de instalación."
-];
+                const condiciones = [
+                    "Los valores presentados en este documento corresponden a una estimación preliminar basada en la información suministrada.",
+                    "El valor final del proyecto puede variar una vez se realice un análisis técnico detallado del sitio de instalación.",
+                    "Cada sistema fotovoltaico requiere evaluación de condiciones estructurales, ubicación exacta, orientación e inclinación del sistema, así como revisión del sistema eléctrico existente.",
+                    "Para definir el alcance definitivo del proyecto es necesario realizar una visita técnica, levantar información en campo y desarrollar la ingeniería de detalle correspondiente.",
+                    "Posteriormente se elabora la propuesta técnica y económica final con el diseño definitivo del sistema y las condiciones completas de instalación."
+                ];
 
-let yCond = 60;
+                let yCond = 60;
 
-condiciones.forEach(item => {
+                condiciones.forEach(item => {
 
-const lines = pdf.splitTextToSize(item,160);
+                    const lines = pdf.splitTextToSize(item, 160);
 
-pdf.text("•",20,yCond);
+                    pdf.text("•", 20, yCond);
 
-pdf.text(lines,25,yCond,{maxWidth:160,align:'justify'});
+                    pdf.text(lines, 25, yCond, { maxWidth: 160, align: 'justify' });
 
-yCond += lines.length * 6 + 4;
+                    yCond += lines.length * 6 + 4;
 
-});
+                });
 
-/* FIRMA */
+                /* FIRMA */
 
-const firmaWidth = 120;
-const firmaHeight = firmaWidth / 4.21;
+                const firmaWidth = 120;
+                const firmaHeight = firmaWidth / 4.21;
 
-pdf.addImage(firma,'PNG',(pageWidth-firmaWidth)/2,pageHeight-90,firmaWidth,firmaHeight);
+                pdf.addImage(firma, 'PNG', (pageWidth - firmaWidth) / 2, pageHeight - 90, firmaWidth, firmaHeight);
 
-drawFooter();
+                drawFooter();
 
-pdf.save('reporte-sistema-solar.pdf');
+                pdf.save('reporte-sistema-solar.pdf');
 
-},400);
+            }, 400);
 
-};
+        };
 
-}
+    }
     /* =========================
        FORMATOS
     ========================== */

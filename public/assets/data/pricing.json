@@ -2,28 +2,33 @@
   "ranges": [
     {
       "min_kwp": 0,
+      "max_kwp": 3,
+      "price": 28000000
+    },
+    {
+      "min_kwp": 3,
+      "max_kwp": 5,
+      "price": 32000000
+    },
+    {
+      "min_kwp": 5,
       "max_kwp": 10,
-      "price": 10000000
+      "price": 36000000
     },
     {
       "min_kwp": 10,
-      "max_kwp": 15,
-      "price": 15000000
+      "max_kwp": 20,
+      "price": 40000000
     },
     {
-      "min_kwp": 15,
+      "min_kwp": 20,
       "max_kwp": 30,
-      "price": 100000000
+      "price": 44000000
     },
     {
       "min_kwp": 30,
-      "max_kwp": 50,
-      "price": 160000000
-    },
-    {
-      "min_kwp": 50,
-      "max_kwp": 100,
-      "price": 300000000
+      "max_kwp": 1000,
+      "price": 90000000
     }
   ]
 }
