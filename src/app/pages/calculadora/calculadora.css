@@ -4,21 +4,16 @@
     gap: 15px;
 }
 
-.form-grid label {
-    font-weight: bold;
-    color: rgb(20, 101, 130);
-}
-
-.results-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 15px;
-}
-
 .form-group {
     display: flex;
     flex-direction: column;
     width: 100%;
+}
+
+.form-group label {
+    font-size: clamp(15px, 1.2vw, 18px);
+    font-weight: bold;
+    color: rgb(20, 101, 130);
 }
 
 .form-group input,
@@ -28,9 +23,8 @@
     border: 2px solid #146582;
     font-size: clamp(15px, 1.2vw, 18px);
     width: 100%;
+    background-color: #ffffff;
 }
-
-
 .button-section {
     margin: clamp(10px, 2vw, 20px) 0;
 }
@@ -55,6 +49,15 @@
 }
 
 
+
+
+
+.results-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
 .result-card {
     display: flex;
     flex-direction: column;
@@ -70,7 +73,6 @@
     min-height: 110px;
 }
 
-
 .result-card span {
     font-size: clamp(15px, 1.2vw, 18px);
     color: #146582;
@@ -79,6 +81,9 @@
     align-items: center;
     justify-content: center;
 }
+
+
+
 
 
 

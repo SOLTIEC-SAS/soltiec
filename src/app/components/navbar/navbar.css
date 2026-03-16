@@ -29,19 +29,22 @@
 }
 
 .menu a {
-  text-decoration: none; /* quita el subrayado */
-  color: inherit;        /* usa el color del texto normal */
+  text-decoration: none;
+  /* quita el subrayado */
+  color: inherit;
+  /* usa el color del texto normal */
 }
 
 .menu a:visited {
-  
+
   color: inherit;
 
 }
+
 .menu li {
   cursor: pointer;
   position: relative;
-font-size: clamp(15px, 2.6vw, 17.5px);
+  font-size: clamp(15px, 2.6vw, 17.5px);
 }
 
 .menu li:hover {
@@ -64,7 +67,8 @@ font-size: clamp(15px, 2.6vw, 17.5px);
 
 .submenu {
   position: absolute;
-  top: 100%;   /* se pega justo debajo del botón */
+  top: 100%;
+  /* se pega justo debajo del botón */
   left: 0;
   background: #146582;
   box-shadow: 0 4px 12px rgba(0, 0, 0, .15);
@@ -123,5 +127,9 @@ font-size: clamp(15px, 2.6vw, 17.5px);
 
   .submenu li:hover {
     text-decoration: underline;
+  }
+
+  .menu li:nth-child(5) {
+    padding-bottom: 10px;
   }
 }
