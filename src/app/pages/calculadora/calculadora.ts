@@ -46,6 +46,8 @@ paybackLabel = '';
 chart: any;
 pricingRanges: any[] = [];
 
+
+
 /* VALIDACIÓN FORMULARIO */
 
 submitted = false;
@@ -114,38 +116,62 @@ errorMessage = '';
        CÁLCULO SISTEMA
     ========================== */
 
-    calculate() {
+  calculate() {
 
-        const avg = (this.fact1 + this.fact2 + this.fact3) / 3;
-        const tarifa = this.tarifasEstrato[this.estrato];
-        const monthlyCost = avg * tarifa;
+    this.submitted = true;
 
-        const daily = avg / 30;
-        const hsp = this.selectedCityData?.hsp;
+    if (
+        !this.fact1 ||
+        !this.fact2 ||
+        !this.fact3 ||
+        !this.department ||
+        !this.city ||
+        !this.selectedCityData
+    ) {
 
-        const systemSize = (daily / hsp) * (this.coverage / 100);
+        this.errorMessage = 'Por favor completa todos los datos antes de calcular el sistema.';
+        return;
 
-        const kwp = Number(systemSize.toFixed(2));
-
-        const panels = Math.ceil((kwp * 1000) / 575);
-
-        const investment = this.getPriceFromRange(kwp);
-
-        const roofArea = panels * 2.4;
-
-        const co2 = avg * 12 * 0.164;
-
-        this.results = {
-            systemSize: kwp,
-            panels,
-            investment,
-            monthlyCost,
-            roofArea,
-            co2
-        };
-
-        this.calculateROI(investment, monthlyCost);
     }
+
+    this.errorMessage = '';
+
+    const avg = (this.fact1 + this.fact2 + this.fact3) / 3;
+
+    const tarifa = this.tarifasEstrato[this.estrato];
+
+    const monthlyCost = avg * tarifa;
+
+    const daily = avg / 30;
+
+    const hsp = this.selectedCityData?.hsp;
+
+    const systemSize = (daily / hsp) * (this.coverage / 100);
+
+    const kwp = Number(systemSize.toFixed(2));
+
+    const panels = Math.ceil((kwp * 1000) / 575);
+
+    const investment = this.getPriceFromRange(kwp);
+
+    const roofArea = panels * 2.4;
+
+    const co2 = avg * 12 * 0.164;
+
+    this.results = {
+        systemSize: kwp,
+        panels,
+        investment,
+        monthlyCost,
+        roofArea,
+        co2
+    };
+
+    this.calculateROI(investment, monthlyCost);
+}
+
+
+
 
     getPriceFromRange(kwp: number) {
 
