@@ -41,11 +41,15 @@ export class Calculadora implements OnInit {
     results: any = null;
     roiData: any = null;
 
-    roi10 = 0;
-    paybackLabel = '';
+roi10 = 0;
+paybackLabel = '';
+chart: any;
+pricingRanges: any[] = [];
 
-    chart: any;
-    pricingRanges: any[] = [];
+/* VALIDACIÓN FORMULARIO */
+
+submitted = false;
+errorMessage = '';
 
     tarifasEstrato: any = {
         1: 600,
