@@ -219,12 +219,12 @@
     <div class="roi-metrics">
 
         <div class="roi-box">
-            <span>Payback estimado: </span>
+            <span>Payback estimado: </span><br>
             <strong>{{paybackLabel}}</strong>
         </div>
 
         <div class="roi-box" [class.roi-positive]="roi10>0" [class.roi-negative]="roi10<=0">
-            <span>Retorno acumulado 10 años: </span>
+            <span>Retorno acumulado 10 años: </span><br>
             <strong>{{formatCurrency(roi10)}}</strong>
         </div>
 

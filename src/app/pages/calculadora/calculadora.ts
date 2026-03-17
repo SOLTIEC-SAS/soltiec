@@ -38,12 +38,12 @@ export class Calculadora implements OnInit {
     cityData: any = {};
     selectedCityData: any = null;
 
-    
+
     results: any = null;
     roiData: any = null;
 
     roi10 = 0;
-    degradation=0.9;
+    degradation = 0.9;
     paybackLabel = '';
     chart: any;
     pricingRanges: any[] = [];
@@ -152,8 +152,8 @@ export class Calculadora implements OnInit {
         const daily = avg / 30;
 
         const hsp = this.selectedCityData?.hsp;
-
-        const systemSize = (daily / hsp) * (this.coverage / 100);
+        const efficiency = 0.85;
+        const systemSize = (daily / (hsp * efficiency)) * (this.coverage / 100);
 
         const kwp = Number(systemSize.toFixed(2));
 
@@ -195,57 +195,57 @@ export class Calculadora implements OnInit {
        ROI
     ========================== */
 
-calculateROI(investment: number, monthlyCost: number) {
+    calculateROI(investment: number, monthlyCost: number) {
 
-    const annual = monthlyCost * 12;
+        const annual = monthlyCost * 12;
 
-    let cumulative = -investment;
+        let cumulative = -investment;
 
-    const years: number[] = [];
-    const cumulativeData: number[] = [];
-    const savings: number[] = [];
-    const investmentBar: number[] = [];
+        const years: number[] = [];
+        const cumulativeData: number[] = [];
+        const savings: number[] = [];
+        const investmentBar: number[] = [];
 
-    for (let i = 0; i <= 20; i++) {
+        for (let i = 0; i <= 20; i++) {
 
-        years.push(i);
+            years.push(i);
 
-        if (i === 0) {
+            if (i === 0) {
 
-            cumulativeData.push(-investment);
-            savings.push(0);
-            investmentBar.push(-investment);
+                cumulativeData.push(-investment);
+                savings.push(0);
+                investmentBar.push(-investment);
 
-        } 
-else {
+            }
+            else {
 
-    const yearlySavings = annual * (this.degradation ** i);  // degradación acumulada
+                const yearlySavings = annual * (this.degradation ** i);  // degradación acumulada
 
-    cumulative += yearlySavings;
+                cumulative += yearlySavings;
 
-    cumulativeData.push(cumulative);
-    savings.push(yearlySavings);
-    investmentBar.push(0);
+                cumulativeData.push(cumulative);
+                savings.push(yearlySavings);
+                investmentBar.push(0);
 
-}
+            }
+        }
+
+        const payback = cumulativeData.findIndex(v => v >= 0);
+
+        this.paybackLabel =
+            payback === -1 ? 'No recupera la inversión' : payback + ' años';
+
+        this.roi10 = cumulativeData[10];
+
+        this.roiData = {
+            years,
+            cumulativeData,
+            savings,
+            investmentBar
+        };
+
+        setTimeout(() => this.drawChart(), 50);
     }
-
-    const payback = cumulativeData.findIndex(v => v >= 0);
-
-    this.paybackLabel =
-        payback === -1 ? 'No recupera la inversión' : payback + ' años';
-
-    this.roi10 = cumulativeData[10];
-
-    this.roiData = {
-        years,
-        cumulativeData,
-        savings,
-        investmentBar
-    };
-
-    setTimeout(() => this.drawChart(), 50);
-}
 
     /* =========================
        GRÁFICA
