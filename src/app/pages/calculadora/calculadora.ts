@@ -521,6 +521,51 @@ export class Calculadora implements OnInit {
        FORMATOS
     ========================== */
 
+
+
+
+
+
+/* =========================
+   SOLO NÚMEROS INPUTS
+========================= */
+
+onlyNumbersKeydown(event: KeyboardEvent) {
+
+    // Permitir teclas especiales
+    const allowedKeys = [
+        'Backspace', 'Tab', 'ArrowLeft', 'ArrowRight', 'Delete'
+    ];
+
+    if (allowedKeys.includes(event.key)) return;
+
+    // Permitir solo números
+    if (!/^[0-9]$/.test(event.key)) {
+        event.preventDefault();
+    }
+}
+
+onlyNumbersPaste(event: ClipboardEvent) {
+
+    const pastedText = event.clipboardData?.getData('text') || '';
+
+    // Si pega algo que no sea número → bloquear
+    if (!/^\d+$/.test(pastedText)) {
+        event.preventDefault();
+    }
+}
+
+onlyNumbers(event: any, field: string) {
+
+    // Limpia cualquier cosa que no sea número
+    const cleanValue = event.target.value.replace(/[^0-9]/g, '');
+
+    event.target.value = cleanValue;
+
+    // Actualiza la variable correspondiente
+    (this as any)[field] = cleanValue ? Number(cleanValue) : null;
+}
+
     formatCurrency(value: number) {
 
         return value.toLocaleString('es-CO', {
