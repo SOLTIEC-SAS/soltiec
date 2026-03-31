@@ -369,8 +369,98 @@ export class Calculadora implements OnInit {
             pdf.text(value, 85, y);
 
         };
+const portada = new Image();
+portada.src = 'assets/images/PORTADA.png';
+const logoPortada = new Image();
+logoPortada.src = 'assets/images/logo_soltiec_transparente_blanco.png';
+portada.onload = () => {
 
-        logo.onload = () => {
+
+
+/* ========================= */
+/* PORTADA FINAL PRO */
+/* ========================= */
+
+pdf.addImage(portada, 'PNG', 0, 0, pageWidth, pageHeight);
+
+/* ===== RECTÁNGULO SUPERIOR ===== */
+const rectY = 10;
+const rectHeight = 60;
+
+pdf.setFillColor(20, 101, 130);
+pdf.rect(0, rectY, pageWidth, rectHeight, 'F');
+
+pdf.setTextColor(255, 255, 255);
+
+/* ===== TEXTO SUPERIOR ===== */
+const textStartY = rectY + 22;
+
+/* TÍTULO */
+pdf.setFont('helvetica', 'bold');
+pdf.setFontSize(30);
+pdf.text('REPORTE PRELIMINAR SSFV', 20, textStartY);
+
+/* kWp */
+pdf.setFontSize(24);
+pdf.text(`${this.formatNumber(this.results.systemSize)} kWp INSTALADOS`, 20, textStartY + 15);
+
+/* UBICACIÓN */
+pdf.setFont('helvetica', 'normal');
+pdf.setFontSize(14);
+pdf.text(`${this.city}, ${this.department}`, 20, textStartY + 25);
+
+
+/* ===== INFO INFERIOR (COMPACTA Y ALINEADA) ===== */
+pdf.setFont('helvetica', 'bold');
+pdf.setFontSize(14);
+
+const startY = pageHeight - 105;
+const labelX = 25;
+const valueX = 70;
+const lineGap = 10;
+
+pdf.text('Elaborado por:', labelX, startY);
+pdf.text('Celular:', labelX, startY + lineGap);
+pdf.text('Correo:', labelX, startY + lineGap * 2);
+pdf.text('Fecha:', labelX, startY + lineGap * 3);
+
+pdf.setFont('helvetica', 'normal');
+
+pdf.text('Santiago Ramírez', valueX, startY);
+pdf.text('301 892 8866', valueX, startY + lineGap);
+pdf.text('coordinador.proyectos@soltiec.co', valueX, startY + lineGap * 2);
+pdf.text(formattedDate, valueX, startY + lineGap * 3);
+
+
+/* ===== LOGO CENTRADO ===== */
+const logoWidth = 70;
+const logoHeight = logoWidth / 3.5;
+
+pdf.addImage(
+    logoPortada,
+    'PNG',
+    (pageWidth - logoWidth) / 2,
+    pageHeight - 45,
+    logoWidth,
+    logoHeight
+);
+
+
+/* ===== FRASE FINAL ===== */
+pdf.setFont('helvetica', 'bold');
+pdf.setFontSize(13);
+
+pdf.text(
+    '¡SOLUCIONES QUE ENTREGAN VALOR!',
+    pageWidth / 2,
+    pageHeight - 8,
+    { align: 'center' }
+);
+
+
+/* ===== SIGUIENTE PÁGINA ===== */
+pdf.addPage();
+
 
             /* ========================= */
             /* PAGINA 1 */

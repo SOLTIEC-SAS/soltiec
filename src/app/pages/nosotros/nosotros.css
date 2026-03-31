@@ -77,8 +77,8 @@ justify-content: center; /* centra las filas */
 }
 
 .values-grid > * {
-  flex: 1 1 260px; /* mínimo 260px, crece si hay espacio */
-  max-width: 350px; /* evita que se estiren feo */
+  flex: 1 1 260px;
+  max-width: 350px;
 }
 
 .value-card {
