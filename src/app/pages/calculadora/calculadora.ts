@@ -369,101 +369,168 @@ export class Calculadora implements OnInit {
             pdf.text(value, 85, y);
 
         };
-const portada = new Image();
-portada.src = 'assets/images/PORTADA.png';
-const logoPortada = new Image();
-logoPortada.src = 'assets/images/logo_soltiec_transparente_blanco.png';
-portada.onload = () => {
+        const portada = new Image();
+        portada.src = 'assets/images/PORTADA.png';
+        const logoPortada = new Image();
+        logoPortada.src = 'assets/images/logo_soltiec_transparente_blanco.png';
+        portada.onload = () => {
 
-
-
-/* ========================= */
-/* PORTADA FINAL PRO */
-/* ========================= */
-
-pdf.addImage(portada, 'PNG', 0, 0, pageWidth, pageHeight);
-
-/* ===== RECTÁNGULO SUPERIOR ===== */
-const rectY = 10;
-const rectHeight = 60;
-
-pdf.setFillColor(20, 101, 130);
-pdf.rect(0, rectY, pageWidth, rectHeight, 'F');
-
-pdf.setTextColor(255, 255, 255);
-
-/* ===== TEXTO SUPERIOR ===== */
-const textStartY = rectY + 22;
-
-/* TÍTULO */
-pdf.setFont('helvetica', 'bold');
-pdf.setFontSize(30);
-pdf.text('REPORTE PRELIMINAR SSFV', 20, textStartY);
-
-/* kWp */
-pdf.setFontSize(24);
-pdf.text(`${this.formatNumber(this.results.systemSize)} kWp INSTALADOS`, 20, textStartY + 15);
-
-/* UBICACIÓN */
-pdf.setFont('helvetica', 'normal');
-pdf.setFontSize(14);
-pdf.text(`${this.city}, ${this.department}`, 20, textStartY + 25);
-
-
-/* ===== INFO INFERIOR (COMPACTA Y ALINEADA) ===== */
-pdf.setFont('helvetica', 'bold');
-pdf.setFontSize(14);
-
-const startY = pageHeight - 105;
-const labelX = 25;
-const valueX = 70;
-const lineGap = 10;
-
-pdf.text('Elaborado por:', labelX, startY);
-pdf.text('Celular:', labelX, startY + lineGap);
-pdf.text('Correo:', labelX, startY + lineGap * 2);
-pdf.text('Fecha:', labelX, startY + lineGap * 3);
-
-pdf.setFont('helvetica', 'normal');
-
-pdf.text('Santiago Ramírez', valueX, startY);
-pdf.text('301 892 8866', valueX, startY + lineGap);
-pdf.text('coordinador.proyectos@soltiec.co', valueX, startY + lineGap * 2);
-pdf.text(formattedDate, valueX, startY + lineGap * 3);
-
-
-/* ===== LOGO CENTRADO ===== */
-const logoWidth = 70;
-const logoHeight = logoWidth / 3.5;
-
-pdf.addImage(
-    logoPortada,
-    'PNG',
-    (pageWidth - logoWidth) / 2,
-    pageHeight - 45,
-    logoWidth,
-    logoHeight
-);
-
-
-/* ===== FRASE FINAL ===== */
-pdf.setFont('helvetica', 'bold');
-pdf.setFontSize(13);
-
-pdf.text(
-    '¡SOLUCIONES QUE ENTREGAN VALOR!',
-    pageWidth / 2,
-    pageHeight - 8,
-    { align: 'center' }
-);
-
-
-/* ===== SIGUIENTE PÁGINA ===== */
-pdf.addPage();
 
 
             /* ========================= */
-            /* PAGINA 1 */
+            /* PORTADA FINAL PRO */
+            /* ========================= */
+
+            pdf.addImage(portada, 'PNG', 0, 0, pageWidth, pageHeight);
+
+            /* ===== RECTÁNGULO SUPERIOR ===== */
+            const rectY = 10;
+            const rectHeight = 60;
+
+            pdf.setFillColor(20, 101, 130);
+            pdf.rect(0, rectY, pageWidth, rectHeight, 'F');
+
+            pdf.setTextColor(255, 255, 255);
+
+            /* ===== TEXTO SUPERIOR ===== */
+            const textStartY = rectY + 22;
+
+            /* TÍTULO */
+            pdf.setFont('helvetica', 'bold');
+            pdf.setFontSize(30);
+            pdf.text('REPORTE PRELIMINAR SSFV', 20, textStartY);
+
+            /* kWp */
+            pdf.setFontSize(24);
+            pdf.text(`${this.formatNumber(this.results.systemSize)} kWp`, 20, textStartY + 15);
+
+            /* UBICACIÓN */
+            pdf.setFont('helvetica', 'normal');
+            pdf.setFontSize(14);
+            pdf.text(`${this.city}, ${this.department}`, 20, textStartY + 25);
+
+
+            /* ===== INFO INFERIOR (COMPACTA Y ALINEADA) ===== */
+            pdf.setFont('helvetica', 'bold');
+            pdf.setFontSize(14);
+
+            const startY = pageHeight - 105;
+            const labelX = 25;
+            const valueX = 70;
+            const lineGap = 10;
+
+            pdf.text('Elaborado por:', labelX, startY);
+            pdf.text('Celular:', labelX, startY + lineGap);
+            pdf.text('Correo:', labelX, startY + lineGap * 2);
+            pdf.text('Fecha:', labelX, startY + lineGap * 3);
+
+            pdf.setFont('helvetica', 'normal');
+
+            pdf.text('Santiago Ramírez', valueX, startY);
+            pdf.text('301 892 8866', valueX, startY + lineGap);
+            pdf.text('coordinador.proyectos@soltiec.co', valueX, startY + lineGap * 2);
+            pdf.text(formattedDate, valueX, startY + lineGap * 3);
+
+
+            /* ===== LOGO CENTRADO ===== */
+            const logoWidth = 70;
+            const logoHeight = logoWidth / 3.5;
+
+            pdf.addImage(
+                logoPortada,
+                'PNG',
+                (pageWidth - logoWidth) / 2,
+                pageHeight - 45,
+                logoWidth,
+                logoHeight
+            );
+
+
+            /* ===== FRASE FINAL ===== */
+            pdf.setFont('helvetica', 'bold');
+            pdf.setFontSize(13);
+
+            pdf.text(
+                '¡SOLUCIONES QUE ENTREGAN VALOR!',
+                pageWidth / 2,
+                pageHeight - 8,
+                { align: 'center' }
+            );
+
+
+            /* ===== SIGUIENTE PÁGINA ===== */
+            pdf.addPage();
+/* ========================= */
+/* PAGINA 1 - BENEFICIOS */
+/* ========================= */
+
+drawHeader();
+
+/* TITULO */
+pdf.setFont('helvetica', 'bold');
+pdf.setFontSize(18);
+pdf.setTextColor(20, 101, 130);
+pdf.text('¿Por qué elegir energía solar?', 105, 45, { align: 'center' });
+
+/* CONTENIDO */
+pdf.setFont('helvetica', 'normal');
+pdf.setFontSize(12);
+pdf.setTextColor(0, 0, 0);
+
+let yInfo = 65;
+
+/* BENEFICIOS */
+const beneficios = [
+    'Recurso solar inagotable',
+    'Renovable y sustentable',
+    'Ahorros de larga duración',
+    'Bajo costo de mantenimiento',
+    'Posibilidad de incluir baterías para independencia energética',
+    'Exclusión de IVA (Ley 1715 Art. 12)',
+    'Exención de arancel (Ley 1715 Art. 13)'
+];
+
+beneficios.forEach(item => {
+    pdf.text(`• ${item}`, 30, yInfo);
+    yInfo += 8;
+});
+
+/* SUBTITULO */
+yInfo += 10;
+
+pdf.setFont('helvetica', 'bold');
+pdf.setFontSize(16);
+pdf.setTextColor(20, 101, 130);
+pdf.text('Nuestra diferencia', 105, yInfo, { align: 'center' });
+
+yInfo += 12;
+
+/* DIFERENCIALES */
+pdf.setFont('helvetica', 'normal');
+pdf.setFontSize(12);
+pdf.setTextColor(0, 0, 0);
+
+const diferenciales = [
+    'Equipo técnico capacitado',
+    'Experiencia en más de 50 instalaciones a nivel nacional',
+    'Contrato de Operación y Mantenimiento a bajo coste (opcional)'
+];
+
+diferenciales.forEach(item => {
+    pdf.text(`• ${item}`, 30, yInfo);
+    yInfo += 8;
+});
+
+drawFooter();
+pdf.addPage();
+
+
+
+
+
+
+            /* ========================= */
+            /* PAGINA */
             /* ========================= */
 
             drawHeader();
@@ -526,7 +593,7 @@ pdf.addPage();
                 drawFooter();
 
                 /* ========================= */
-                /* PAGINA 2 */
+                /* PAGINA  */
                 /* ========================= */
 
                 pdf.addPage();
@@ -554,7 +621,7 @@ pdf.addPage();
                 drawFooter();
 
                 /* ========================= */
-                /* PAGINA 3 */
+                /* PAGINA  */
                 /* ========================= */
 
                 pdf.addPage();
@@ -616,45 +683,45 @@ pdf.addPage();
 
 
 
-/* =========================
-   SOLO NÚMEROS INPUTS
-========================= */
+    /* =========================
+       SOLO NÚMEROS INPUTS
+    ========================= */
 
-onlyNumbersKeydown(event: KeyboardEvent) {
+    onlyNumbersKeydown(event: KeyboardEvent) {
 
-    // Permitir teclas especiales
-    const allowedKeys = [
-        'Backspace', 'Tab', 'ArrowLeft', 'ArrowRight', 'Delete'
-    ];
+        // Permitir teclas especiales
+        const allowedKeys = [
+            'Backspace', 'Tab', 'ArrowLeft', 'ArrowRight', 'Delete'
+        ];
 
-    if (allowedKeys.includes(event.key)) return;
+        if (allowedKeys.includes(event.key)) return;
 
-    // Permitir solo números
-    if (!/^[0-9]$/.test(event.key)) {
-        event.preventDefault();
+        // Permitir solo números
+        if (!/^[0-9]$/.test(event.key)) {
+            event.preventDefault();
+        }
     }
-}
 
-onlyNumbersPaste(event: ClipboardEvent) {
+    onlyNumbersPaste(event: ClipboardEvent) {
 
-    const pastedText = event.clipboardData?.getData('text') || '';
+        const pastedText = event.clipboardData?.getData('text') || '';
 
-    // Si pega algo que no sea número → bloquear
-    if (!/^\d+$/.test(pastedText)) {
-        event.preventDefault();
+        // Si pega algo que no sea número → bloquear
+        if (!/^\d+$/.test(pastedText)) {
+            event.preventDefault();
+        }
     }
-}
 
-onlyNumbers(event: any, field: string) {
+    onlyNumbers(event: any, field: string) {
 
-    // Limpia cualquier cosa que no sea número
-    const cleanValue = event.target.value.replace(/[^0-9]/g, '');
+        // Limpia cualquier cosa que no sea número
+        const cleanValue = event.target.value.replace(/[^0-9]/g, '');
 
-    event.target.value = cleanValue;
+        event.target.value = cleanValue;
 
-    // Actualiza la variable correspondiente
-    (this as any)[field] = cleanValue ? Number(cleanValue) : null;
-}
+        // Actualiza la variable correspondiente
+        (this as any)[field] = cleanValue ? Number(cleanValue) : null;
+    }
 
     formatCurrency(value: number) {
 
