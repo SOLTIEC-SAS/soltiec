@@ -65,15 +65,20 @@
 }
 
 .values-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    justify-content: center;
+display: flex;
+flex-wrap: wrap;
+justify-content: center; /* centra las filas */
+
     gap: clamp(20px, 4vw, 50px);
     margin: clamp(15px, 4vw, 30px) auto;
     max-width: 1270px;
     border-bottom: 2px solid #146582;
     padding-bottom: clamp(20px, 4vw, 40px);
-    justify-items: center;
+}
+
+.values-grid > * {
+  flex: 1 1 260px; /* mínimo 260px, crece si hay espacio */
+  max-width: 350px; /* evita que se estiren feo */
 }
 
 .value-card {
@@ -81,8 +86,8 @@
     flex-direction: column;
     align-items: center;
     text-align: center;
-
 }
+
 
 .value-card img {
     width: clamp(120px, 18vw, 180px);
@@ -147,18 +152,19 @@
 
 
 .timeline {
-    margin: auto;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
 }
 
 .timeline-step {
     background: #F0F8FF;
-padding: clamp(8px, 1.5vw, 14px);
+    padding: clamp(8px, 1.5vw, 14px);
     border-radius: 14px;
     border: 2px solid #146582;
     transition: .25s;
+    width: 220px;
 }
 
 .timeline-step:hover {

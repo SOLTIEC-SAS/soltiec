@@ -29,9 +29,6 @@ export class Proyectos {
     { titulo: 'Adecuación parque infantil', categoria: 'Construcción', ubicacion: 'Medellín, Antioquia', imagen: 'assets/images/Construccion4.jpeg', atl: 'Adecuación parque infantil' },
     { titulo: 'SSFV on-grid 29,33 kWp', categoria: 'Energía', ubicacion: 'Cali, Valle del Cauca', imagen: 'assets/images/Energia5.jpg', alt: 'SSFV on-grid 29,33 kWp' },
     { titulo: 'Cambio de fachada', categoria: 'Construcción', ubicacion: 'Medellín, Antioquia', imagen: 'assets/images/Construccion5.jpeg', atl: 'Cambio de fachada' },
-    
-
-    
     { titulo: 'SSFV on-grid 4,7 kWp', categoria: 'Energía', ubicacion: 'Cali, Valle del Cauca', imagen: 'assets/images/Energia6.jpeg', alt: 'SSFV on-grid 4,7 kWp' },
     { titulo: 'SSFV para Radioenlaces', categoria: 'Energía', ubicacion: 'Montelíbano, Córdoba', imagen: 'assets/images/Energia7.jpg', alt: 'SSFV para Radioenlaces' },
 
