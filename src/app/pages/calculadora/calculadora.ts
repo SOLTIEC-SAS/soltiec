@@ -142,31 +142,23 @@ export class Calculadora implements OnInit {
         }
 
         this.errorMessage = '';
-
         const avg = (this.fact1 + this.fact2 + this.fact3) / 3;
-
         const tarifa = this.tarifasEstrato[this.estrato];
-
+        const wpanels = 575;
         const monthlyCost = avg * tarifa;
-
         const daily = avg / 30;
-
         const hsp = this.selectedCityData?.hsp;
         const efficiency = 0.85;
         const systemSize = (daily / (hsp * efficiency)) * (this.coverage / 100);
-
         const kwp = Number(systemSize.toFixed(2));
-
-        const panels = Math.ceil((kwp * 1000) / 575);
-
-        const investment = this.getPriceFromRange(kwp);
-
-        const roofArea = systemSize * 8;
-
-        const co2 = avg * 12 * 0.164;
+        const panels = Math.ceil((kwp * 1000) / wpanels);
+        const kwinstall = (panels * wpanels) / 1000;
+        const investment = kwinstall * this.getPriceFromRange(kwp);
+        const roofArea = kwinstall * 8;
+        const co2 =kwinstall* hsp * 365 * 0.8 * 0.18;
 
         this.results = {
-            systemSize: kwp,
+            kwinstall: kwinstall,
             panels,
             investment,
             monthlyCost,
@@ -402,7 +394,7 @@ export class Calculadora implements OnInit {
 
             /* kWp */
             pdf.setFontSize(24);
-            pdf.text(`${this.formatNumber(this.results.systemSize)} kWp`, 20, textStartY + 15);
+            pdf.text(`${this.formatNumber(this.results.kwinstall)} kWp`, 20, textStartY + 15);
 
             /* UBICACIÓN */
             pdf.setFont('helvetica', 'normal');
@@ -460,69 +452,69 @@ export class Calculadora implements OnInit {
 
             /* ===== SIGUIENTE PÁGINA ===== */
             pdf.addPage();
-/* ========================= */
-/* PAGINA 1 - BENEFICIOS */
-/* ========================= */
+            /* ========================= */
+            /* PAGINA 1 - BENEFICIOS */
+            /* ========================= */
 
-drawHeader();
+            drawHeader();
 
-/* TITULO */
-pdf.setFont('helvetica', 'bold');
-pdf.setFontSize(18);
-pdf.setTextColor(20, 101, 130);
-pdf.text('¿Por qué elegir energía solar?', 105, 45, { align: 'center' });
+            /* TITULO */
+            pdf.setFont('helvetica', 'bold');
+            pdf.setFontSize(18);
+            pdf.setTextColor(20, 101, 130);
+            pdf.text('¿Por qué elegir energía solar?', 105, 45, { align: 'center' });
 
-/* CONTENIDO */
-pdf.setFont('helvetica', 'normal');
-pdf.setFontSize(12);
-pdf.setTextColor(0, 0, 0);
+            /* CONTENIDO */
+            pdf.setFont('helvetica', 'normal');
+            pdf.setFontSize(12);
+            pdf.setTextColor(0, 0, 0);
 
-let yInfo = 65;
+            let yInfo = 65;
 
-/* BENEFICIOS */
-const beneficios = [
-    'Recurso solar inagotable',
-    'Renovable y sustentable',
-    'Ahorros de larga duración',
-    'Bajo costo de mantenimiento',
-    'Posibilidad de incluir baterías para independencia energética',
-    'Exclusión de IVA (Ley 1715 Art. 12)',
-    'Exención de arancel (Ley 1715 Art. 13)'
-];
+            /* BENEFICIOS */
+            const beneficios = [
+                'Recurso solar inagotable',
+                'Renovable y sustentable',
+                'Ahorros de larga duración',
+                'Bajo costo de mantenimiento',
+                'Posibilidad de incluir baterías para independencia energética',
+                'Exclusión de IVA (Ley 1715 Art. 12)',
+                'Exención de arancel (Ley 1715 Art. 13)'
+            ];
 
-beneficios.forEach(item => {
-    pdf.text(`• ${item}`, 30, yInfo);
-    yInfo += 8;
-});
+            beneficios.forEach(item => {
+                pdf.text(`• ${item}`, 30, yInfo);
+                yInfo += 8;
+            });
 
-/* SUBTITULO */
-yInfo += 10;
+            /* SUBTITULO */
+            yInfo += 10;
 
-pdf.setFont('helvetica', 'bold');
-pdf.setFontSize(16);
-pdf.setTextColor(20, 101, 130);
-pdf.text('Nuestra diferencia', 105, yInfo, { align: 'center' });
+            pdf.setFont('helvetica', 'bold');
+            pdf.setFontSize(16);
+            pdf.setTextColor(20, 101, 130);
+            pdf.text('Nuestra diferencia', 105, yInfo, { align: 'center' });
 
-yInfo += 12;
+            yInfo += 12;
 
-/* DIFERENCIALES */
-pdf.setFont('helvetica', 'normal');
-pdf.setFontSize(12);
-pdf.setTextColor(0, 0, 0);
+            /* DIFERENCIALES */
+            pdf.setFont('helvetica', 'normal');
+            pdf.setFontSize(12);
+            pdf.setTextColor(0, 0, 0);
 
-const diferenciales = [
-    'Equipo técnico capacitado',
-    'Experiencia en más de 50 instalaciones a nivel nacional',
-    'Contrato de Operación y Mantenimiento a bajo coste (opcional)'
-];
+            const diferenciales = [
+                'Equipo técnico capacitado',
+                'Experiencia en más de 50 instalaciones a nivel nacional',
+                'Contrato de Operación y Mantenimiento a bajo coste (opcional)'
+            ];
 
-diferenciales.forEach(item => {
-    pdf.text(`• ${item}`, 30, yInfo);
-    yInfo += 8;
-});
+            diferenciales.forEach(item => {
+                pdf.text(`• ${item}`, 30, yInfo);
+                yInfo += 8;
+            });
 
-drawFooter();
-pdf.addPage();
+            drawFooter();
+            pdf.addPage();
 
 
 
@@ -553,7 +545,7 @@ pdf.addPage();
             pdf.line(20, y, 190, y);
             y += 6;
 
-            drawRow('Potencia a instalar:', `${this.formatNumber(this.results.systemSize)} kWp`, y); y += 8;
+            drawRow('Potencia a instalar:', `${this.formatNumber(this.results.kwinstall)} kWp`, y); y += 8;
             drawRow('Cantidad de paneles:', `${this.results.panels}`, y); y += 8;
             drawRow('Área requerida en techo:', `${this.formatNumber(this.results.roofArea)} m²`, y); y += 8;
             drawRow('CO2 evitado al año:', `${this.formatNumber(this.results.co2)} kg`, y); y += 8;
