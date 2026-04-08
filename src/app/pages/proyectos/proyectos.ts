@@ -23,7 +23,7 @@ export class Proyectos {
     { titulo: 'Construcción parque infantil', categoria: 'Construcción', ubicacion: 'Medellín, Antioquia', imagen: 'assets/images/Construccion1.jpeg', alt: 'Adecuación parque infantil' },
     { titulo: 'SSFV on-grid 20,34 kWp', categoria: 'Energía', ubicacion: 'Istmina, Chocó', imagen: 'assets/images/Energia2.png', alt: 'SSFV on-grid 20,34 kWp' },
     { titulo: 'Adecuación cancha sintética', categoria: 'Construcción', ubicacion: 'Medellín, Antioquia', imagen: 'assets/images/Construccion2.jpeg', atl: 'Adecuación cancha sintética' },
-    { titulo: 'SSFV on-grid 44 kWp', categoria: 'Energía', ubicacion: 'Quibdó, Chocó', imagen: 'assets/images/Energia3.jpg', alt: 'SSFV on-grid 44 kWp' },
+    { titulo: 'SSFV on-grid 44 kWp', categoria: 'Energía', ubicacion: 'Quibdó, Chocó', imagen: 'assets/images/Energia3.png', alt: 'SSFV on-grid 44 kWp' },
     { titulo: 'Adecuación cancha arenilla', categoria: 'Construcción', ubicacion: 'Medellín, Antioquia', imagen: 'assets/images/Construccion3.jpg', atl: 'Adecuación cancha arenilla' },
     { titulo: 'SSFV híbrido 15 kWp', categoria: 'Energía', ubicacion: 'Cali, Valle del Cauca', imagen: 'assets/images/Energia4.jpg', alt: 'SSFV on-grid 15 kWp' },
     { titulo: 'Adecuación parque infantil', categoria: 'Construcción', ubicacion: 'Medellín, Antioquia', imagen: 'assets/images/Construccion4.jpeg', atl: 'Adecuación parque infantil' },
