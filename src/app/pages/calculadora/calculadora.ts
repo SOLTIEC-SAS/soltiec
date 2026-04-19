@@ -43,7 +43,7 @@ export class Calculadora implements OnInit {
     roiData: any = null;
 
     roi10 = 0;
-    degradation = 0.9;
+    degradation = 0.96;
     paybackLabel = '';
     chart: any;
     pricingRanges: any[] = [];
@@ -153,34 +153,53 @@ export class Calculadora implements OnInit {
         const kwp = Number(systemSize.toFixed(2));
         const panels = Math.ceil((kwp * 1000) / wpanels);
         const kwinstall = (panels * wpanels) / 1000;
-        const investment = kwinstall * this.getPriceFromRange(kwp);
+        const range = this.getPriceRange(kwp);
+
+        if (kwinstall > 100) {
+
+            this.results = null;
+
+            this.errorMessage = 'Para sistemas mayores a 100 kWp, por favor contáctenos para una cotización personalizada.';
+
+            return;
+        }
+        const priceMin = range.price_min;
+        const priceMax = range.price_max;
+        const priceAvg = (priceMin + priceMax) / 2;
+
+        const investment = kwinstall * priceMin;
+        const investmentROI = kwinstall * priceAvg;
         const roofArea = kwinstall * 8;
-        const co2 =kwinstall* hsp * 365 * 0.8 * 0.18;
+        const co2 = kwinstall * hsp * 365 * 0.8 * 0.18;
 
         this.results = {
             kwinstall: kwinstall,
+            wpanels,
             panels,
             investment,
             monthlyCost,
             roofArea,
-            co2
+            co2,
+            investmentMax: kwinstall * priceMax,
+            investmentMin: kwinstall * priceMin
         };
 
-        this.calculateROI(investment, monthlyCost);
+        this.calculateROI(investmentROI, monthlyCost);
     }
 
 
 
 
-    getPriceFromRange(kwp: number) {
+    getPriceRange(kwp: number) {
 
         for (let r of this.pricingRanges) {
-            if (kwp >= r.min_kwp && kwp < r.max_kwp) {
-                return r.price;
+            if (kwp >= r.min_kwp && kwp <= r.max_kwp) {
+                return r;
             }
         }
 
-        return 0;
+        console.log('❌ No encontró rango para kWp:', kwp);
+        return null;
     }
 
     /* =========================
@@ -546,6 +565,7 @@ export class Calculadora implements OnInit {
             y += 6;
 
             drawRow('Potencia a instalar:', `${this.formatNumber(this.results.kwinstall)} kWp`, y); y += 8;
+            drawRow('Potencia de paneles:', `${Math.round(this.results.wpanels)} Wp`, y); y += 8;
             drawRow('Cantidad de paneles:', `${this.results.panels}`, y); y += 8;
             drawRow('Área requerida en techo:', `${this.formatNumber(this.results.roofArea)} m²`, y); y += 8;
             drawRow('CO2 evitado al año:', `${this.formatNumber(this.results.co2)} kg`, y); y += 8;
@@ -629,11 +649,16 @@ export class Calculadora implements OnInit {
                 pdf.setTextColor(0, 0, 0);
 
                 const condiciones = [
+                    "Este reporte es una estimación preliminar y no constituye una cotización formal ni un contrato. Para recibir una propuesta técnica y económica detallada, por favor contáctenos.",
                     "Los valores presentados en este documento corresponden a una estimación preliminar basada en la información suministrada.",
+                    "La gráfica de retorno de inversión se elabora con base en el costo promedio del sistema. En consecuencia, los resultados presentados son estimativos y pueden variar según las condiciones finales del proyecto.",
                     "El valor final del proyecto puede variar una vez se realice un análisis técnico detallado del sitio de instalación.",
                     "Cada sistema fotovoltaico requiere evaluación de condiciones estructurales, ubicación exacta, orientación e inclinación del sistema, así como revisión del sistema eléctrico existente.",
+                    "Es necesario contar con disponibilidad y condiciones adecuadas de conexión a la red eléctrica pública, conforme a la normativa vigente.",
+                    "La viabilidad del sistema está sujeta a revisión de la capacidad de la red, condiciones del punto de conexión y requisitos del operador de red.",
+                    "Factores como sombras, obstáculos cercanos, condiciones climáticas locales y calidad del recurso solar pueden afectar el desempeño real del sistema.",
                     "Para definir el alcance definitivo del proyecto es necesario realizar una visita técnica, levantar información en campo y desarrollar la ingeniería de detalle correspondiente.",
-                    "Posteriormente se elabora la propuesta técnica y económica final con el diseño definitivo del sistema y las condiciones completas de instalación."
+                    "Posteriormente se elabora la propuesta técnica y económica final con el diseño definitivo del sistema y las condiciones completas de instalación.",
                 ];
 
                 let yCond = 60;
@@ -655,7 +680,7 @@ export class Calculadora implements OnInit {
                 const firmaWidth = 120;
                 const firmaHeight = firmaWidth / 4.21;
 
-                pdf.addImage(firma, 'PNG', (pageWidth - firmaWidth) / 2, pageHeight - 90, firmaWidth, firmaHeight);
+                pdf.addImage(firma, 'PNG', (pageWidth - firmaWidth) / 2, pageHeight - 60, firmaWidth, firmaHeight);
 
                 drawFooter();
 

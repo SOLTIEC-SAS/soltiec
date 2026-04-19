@@ -49,7 +49,7 @@
 
             <h2>¿CÓMO USAR LA CALCULADORA?</h2>
 
-            <p><strong>1.</strong> Ingresa el consumo en kWh de tus últimas tres facturas.</p>
+            <p><strong>1.</strong> Ingresa el consumo en kWh de tus últimas tres facturas de energía.</p>
             <p><strong>2.</strong> Selecciona el estrato de la vivienda o negocio.</p>
             <p><strong>3.</strong> Elige tu departamento y ciudad.</p>
             <p><strong>4.</strong> Define el porcentaje de energía que deseas cubrir con el sistema solar.</p>
@@ -71,16 +71,16 @@
             </p>
             <ul>
                 <li>
-                    <p>Gráfica de retorno de inversión (ROI)</p>
+                    <p>Gráfica de retorno de inversión (ROI).</p>
                 </li>
                 <li>
-                    <p>Ahorro anual estimado</p>
+                    <p>Ahorro anual estimado.</p>
                 </li>
                 <li>
-                    <p>Tiempo de recuperación de la inversión (Payback)</p>
+                    <p>Tiempo de recuperación de la inversión (Payback).</p>
                 </li>
                 <li>
-                    <p>Retorno acumulado en el tiempo</p>
+                    <p>Retorno acumulado en el tiempo.</p>
                 </li>
             </ul>
 
@@ -97,47 +97,26 @@
 
     <div class="form-grid">
 
-<div class="form-group">
-    <label>Factura 1 (kWh)</label>
-    <input 
-        type="text"
-        [(ngModel)]="fact1"
-        (keydown)="onlyNumbersKeydown($event)"
-        (paste)="onlyNumbersPaste($event)"
-        (input)="onlyNumbers($event, 'fact1')"
-        [class.input-error]="submitted && !fact1"
-        inputmode="numeric"
-        autocomplete="off"
-    >
-</div>
+        <div class="form-group">
+            <label>Consumo mes 1 (kWh)</label>
+            <input type="text" [(ngModel)]="fact1" (keydown)="onlyNumbersKeydown($event)"
+                (paste)="onlyNumbersPaste($event)" (input)="onlyNumbers($event, 'fact1')"
+                [class.input-error]="submitted && !fact1" inputmode="numeric" autocomplete="off">
+        </div>
 
-<div class="form-group">
-    <label>Factura 2 (kWh)</label>
-    <input 
-        type="text"
-        [(ngModel)]="fact2"
-        (keydown)="onlyNumbersKeydown($event)"
-        (paste)="onlyNumbersPaste($event)"
-        (input)="onlyNumbers($event, 'fact2')"
-        [class.input-error]="submitted && !fact2"
-        inputmode="numeric"
-        autocomplete="off"
-    >
-</div>
+        <div class="form-group">
+            <label>Consumo mes 2 (kWh)</label>
+            <input type="text" [(ngModel)]="fact2" (keydown)="onlyNumbersKeydown($event)"
+                (paste)="onlyNumbersPaste($event)" (input)="onlyNumbers($event, 'fact2')"
+                [class.input-error]="submitted && !fact2" inputmode="numeric" autocomplete="off">
+        </div>
 
-<div class="form-group">
-    <label>Factura 3 (kWh)</label>
-    <input 
-        type="text"
-        [(ngModel)]="fact3"
-        (keydown)="onlyNumbersKeydown($event)"
-        (paste)="onlyNumbersPaste($event)"
-        (input)="onlyNumbers($event, 'fact3')"
-        [class.input-error]="submitted && !fact3"
-        inputmode="numeric"
-        autocomplete="off"
-    >
-</div>
+        <div class="form-group">
+            <label>Consumo mes 3 (kWh)</label>
+            <input type="text" [(ngModel)]="fact3" (keydown)="onlyNumbersKeydown($event)"
+                (paste)="onlyNumbersPaste($event)" (input)="onlyNumbers($event, 'fact3')"
+                [class.input-error]="submitted && !fact3" inputmode="numeric" autocomplete="off">
+        </div>
         <div class="form-group">
             <label>Estrato</label>
             <select [(ngModel)]="estrato">
@@ -221,7 +200,10 @@
 
         <div class="result-card">
             <span>Inversión inicial:</span>
-            <strong>{{formatCurrency(results.investment)}}</strong>
+            <strong>$ {{ results.investment | number:'1.0-0' }}
+                -
+                $ {{ results.investmentMax | number:'1.0-0' }}
+            </strong>
         </div>
 
         <div class="result-card">
