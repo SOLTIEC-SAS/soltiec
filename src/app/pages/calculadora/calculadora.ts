@@ -569,7 +569,7 @@ export class Calculadora implements OnInit {
             drawRow('Cantidad de paneles:', `${this.results.panels}`, y); y += 8;
             drawRow('Área requerida en techo:', `${this.formatNumber(this.results.roofArea)} m²`, y); y += 8;
             drawRow('CO2 evitado al año:', `${this.formatNumber(this.results.co2)} kg`, y); y += 8;
-            drawRow('Inversión inicial:', `${this.formatCurrency(this.results.investment)}`, y); y += 8;
+            drawRow('Inversión estimada:',`${this.formatCurrency(this.results.investment)} - ${this.formatCurrency(this.results.investmentMax)}`,y);y += 8;
             drawRow('Factura mensual estimada: ', `${this.formatCurrency(this.results.monthlyCost)}`, y); y += 8;
             drawRow('Payback estimado: ', `${this.paybackLabel}`, y); y += 8;
             drawRow('Retorno acumulado 10 años: ', `${this.formatCurrency(this.roi10)}`, y); y += 12;
