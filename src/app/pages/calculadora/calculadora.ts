@@ -777,18 +777,40 @@ export class Calculadora implements OnInit {
     this.enviado = false;
     this.error = false;
 
-    emailjs.send(
-      'service_bsawzzq',
-      'template_p6aodjy',
-      {
-        from_name: form.value.nombre,
-        phone: form.value.telefono,
-        from_email: form.value.email || 'No proporcionado',
-        message: form.value.mensaje || 'Sin mensaje',
-        servicio: form.value.servicio || 'CALCULADORA SSFV'
-      },
-      'GtSDHnH74g9kOpuYS'
-    )
+emailjs.send(
+  'service_bsawzzq',
+  'template_k2gfarh', // ID CALCULADORA
+  {
+    // Datos del cliente
+    from_name: form.value.nombre,
+    phone: form.value.telefono,
+    from_email: form.value.email || 'No proporcionado',
+    message: form.value.mensaje || 'Sin mensaje',
+    servicio: 'CALCULADORA SSFV',
+
+    // Ubicación
+    departamento: this.department,
+    ciudad: this.city,
+
+    // Consumos
+    consumo1: this.fact1,
+    consumo2: this.fact2,
+    consumo3: this.fact3,
+    consumo_promedio: ((this.fact1 + this.fact2 + this.fact3) / 3).toFixed(2),
+    cobertura: `${this.coverage}%`,
+
+    // Resultados
+    kwp: this.formatNumber(this.results?.kwinstall || 0),
+    paneles: this.results?.panels,
+    area: this.formatNumber(this.results?.roofArea || 0),
+    factura: this.formatCurrency(this.results?.monthlyCost || 0),
+    inversion_min: this.formatCurrency(this.results?.investmentMin || 0),
+    inversion_max: this.formatCurrency(this.results?.investmentMax || 0),
+    payback: this.paybackLabel,
+    roi10: this.formatCurrency(this.roi10)
+  },
+  'GtSDHnH74g9kOpuYS'
+)
     .then(() => {
 
       this.loading = false;
