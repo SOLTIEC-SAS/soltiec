@@ -6,6 +6,7 @@ import { Title } from '@angular/platform-browser';
 import Chart from 'chart.js/auto';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
+import emailjs from '@emailjs/browser';
 
 @Component({
     selector: 'app-calculadora',
@@ -755,4 +756,62 @@ export class Calculadora implements OnInit {
             maximumFractionDigits: 2
         });
     }
+
+
+//FORMULARIO
+  loading = false;
+  enviado = false;
+  error = false;
+
+  autoResize(event: any) {
+    const textarea = event.target;
+    textarea.style.height = 'auto';
+    textarea.style.overflow = 'hidden';
+    textarea.style.height = textarea.scrollHeight + 'px';
+  }
+ enviarFormulario(form: any) {
+
+    if (form.invalid) return;
+
+    this.loading = true;
+    this.enviado = false;
+    this.error = false;
+
+    emailjs.send(
+      'service_bsawzzq',
+      'template_p6aodjy',
+      {
+        from_name: form.value.nombre,
+        phone: form.value.telefono,
+        from_email: form.value.email || 'No proporcionado',
+        message: form.value.mensaje || 'Sin mensaje',
+        servicio: form.value.servicio || 'CALCULADORA SSFV'
+      },
+      'GtSDHnH74g9kOpuYS'
+    )
+    .then(() => {
+
+      this.loading = false;
+      this.enviado = true;
+
+      form.resetForm();
+
+      setTimeout(() => {
+        this.enviado = false;
+      }, 4000);
+
+    })
+    .catch((err) => {
+
+      console.error('Error EmailJS:', err);
+      this.loading = false;
+      this.error = true;
+
+      setTimeout(() => {
+        this.error = false;
+      }, 4000);
+
+    });
+  }
+
 }

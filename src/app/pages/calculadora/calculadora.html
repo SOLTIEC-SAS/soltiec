@@ -248,3 +248,35 @@
     </button>
 
 </div>
+
+<section>
+            <h2>DA EL SIGUIENTE PASO</h2>
+    <div class="contact-container">
+
+        <div class="contact-form">
+            <h3>Déjanos tus datos y uno de nuestros asesores se pondrá en contacto contigo</h3>
+            <form #form="ngForm" (ngSubmit)="enviarFormulario(form)" novalidate>
+                <div class="form-group">
+                    <input type="text" name="nombre" ngModel required placeholder="Nombre *" class="form-control">
+                </div>
+                <div class="form-group">
+                    <input type="text" name="telefono" ngModel required placeholder="Teléfono *" class="form-control">
+                </div>
+                <div class="form-group">
+                    <input type="email" name="email" ngModel placeholder="Correo (opcional)" class="form-control">
+                </div>
+                <textarea name="mensaje" ngModel placeholder="Mensaje (opcional)" class="form-control" rows="3"
+                    (input)="autoResize($event)"></textarea>
+                <button type="submit" [disabled]="form.invalid || loading" class="btn-enviar">
+                    {{ loading ? 'Enviando...' : 'Solicitar asesoría' }}
+                </button>
+            </form>
+            <div *ngIf="enviado" class="alert-success">
+                Hemos recibido tu solicitud, pronto nos pondremos en contacto
+            </div>
+            <div *ngIf="error" class="alert-error">
+                Ocurrió un error al enviar la solicitud
+            </div>
+        </div>
+    </div>
+</section>

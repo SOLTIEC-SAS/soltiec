@@ -21,4 +21,5 @@ export const routes: Routes = [
     { path: 'proyectos', component: Proyectos },
     { path: 'contacto', component: Contacto },
     { path: 'calculadora', component: Calculadora },
+    { path: '**', component: Calculadora }
 ];

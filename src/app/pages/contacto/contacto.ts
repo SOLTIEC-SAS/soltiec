@@ -37,7 +37,7 @@ export class Contacto {
     this.error = false;
 
     emailjs.send(
-      'service_pz6g3sy',
+      'service_bsawzzq',
       'template_p6aodjy',
       {
         from_name: form.value.nombre,
